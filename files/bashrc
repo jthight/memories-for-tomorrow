@@ -3,6 +3,7 @@
 # for examples
 # Version Date .bashrc
 alias b-v='echo "Version 20210824"'
+# Added VIA Ansible
 
 # If not running interactively, don't do anything
 case $- in

@@ -1,7 +1,9 @@
 # Aliases
 # alias alias_name="command_to_run"
 # Version Date .bash_aliases
-alias a-v='echo "Version 20210824"'
+alias a-v='echo "Version 20210825"'
+# Added VIA Ansible
+
 # Long format list
 alias ll="ls -la"
 ## Show hidden files ##
