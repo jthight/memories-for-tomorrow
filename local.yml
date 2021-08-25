@@ -10,4 +10,4 @@
         - htop
         - tmux
         - vim-nox
-        - dconf
+        - dconf-cli
