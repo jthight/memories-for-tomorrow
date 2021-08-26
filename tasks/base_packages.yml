@@ -1,0 +1,38 @@
+- name: install base packages
+  tags: packages,base
+  package:
+    name:
+      - alsa-utils  
+      - apt-file
+      - apt-show-versions
+      - apt-utils
+      - aptitude
+      - command-not-found
+      - cowsay
+      - cryptsetup
+      - curl  
+      - figlet
+      - git
+      - gnupg
+      - htop
+      - amd64-microcode  
+      - intel-microcode
+      - keychain
+      - mlocate
+      - neofetch
+      - neovim
+      - net-tools
+      - newsboat        
+      - openssh-server
+      - pmount
+      - rsync  
+      - sl
+      - speedtest-cli
+      - sudo  
+      - tmux
+      - unzip
+      - wget
+      - whois  
+    state: latest
+    update_cache: yes
+

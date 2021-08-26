@@ -1,0 +1,45 @@
+# ansible-pull setup
+#
+# On remote hosts, set up ansible to run periodically via cron using the latest
+# code from a particular git repository, in pull based fashion.
+---
+
+- hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+      ansible_shell_allow_world_readable_temp: true 
+      ssh_users: "dwa"
+
+  pre_tasks:
+    - name: update/upgrade system
+      tags: always,apt
+      apt:
+        upgrade: dist
+        update_cache: yes
+      changed_when: false
+
+  tasks:
+    - include: tasks/base_sources.yml
+    - include: tasks/base_packages.yml
+    - include: tasks/base_users.yml
+    - include: tasks/base_fstrim.yml
+      #    - include: tasks/desktop_xfce.yml
+    - include: tasks/desktop_openbox.yml
+    - include: tasks/desktop_packages.yml
+    - include: tasks/desktop_themes.yml
+      #- include: tasks/desktop_lightdm.yml
+
+  handlers:
+    - name: apt_update
+      apt:
+        update_cache: yes
+    - name: restart_sshd
+      service:
+        name: sshd
+        state: restarted
+    - name: update_grub
+      shell:
+        cmd: update-grub
+

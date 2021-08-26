@@ -1,0 +1,29 @@
+- name: configure lightdm
+  tags: lightdm,settings,desktop
+  template:
+    src: files/etc/lightdm/lightdm.conf
+    dest: /etc/lightdm/lightdm.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution == "Debian"
+
+- name: configure lightdm-gtk-greeter
+  tags: lightdm,settings,desktop
+  template:
+    src: files/etc/lightdm/lightdm-gtk-greeter.conf
+    dest: /etc/lightdm/lightdm-gtk-greeter.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution == "Debian"
+
+- name: configure lightdm-debian
+  tags: lightdm,settings,desktop
+  template:
+    src: files/usr/share/lightdm/lightdm.conf.d/01_debian.conf
+    dest: /usr/share/lightdm/lightdm.conf.d/01_debian.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution == "Debian"

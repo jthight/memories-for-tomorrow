@@ -1,0 +1,9 @@
+# Periodic TRIM optimizes performance on SSD storage. Enable a weekly task that
+# discards unused blocks on the drive.
+
+- name: enable periodic trim for ssd
+  tags: systemd,settings,base
+  ansible.builtin.systemd:
+      name: fstrim.timer
+      enabled: yes
+

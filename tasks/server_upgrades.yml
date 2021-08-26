@@ -1,0 +1,9 @@
+- name: copy 50unattended-upgrades for debian
+  tags: apt,settings,server
+  copy:
+    src: files/etc/apt/apt.conf.d/50unattended-upgrades
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution == "Debian"

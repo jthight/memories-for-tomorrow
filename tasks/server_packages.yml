@@ -1,0 +1,14 @@
+---
+- name: install server packages
+  tags: packages,server
+  package:
+    name:
+      - fail2ban
+      - lm-sensors
+      - logwatch
+      - newsboat
+      - nmap
+      - vbetool  
+      - unattended-upgrades
+    state: latest
+

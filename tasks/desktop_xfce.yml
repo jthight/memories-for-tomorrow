@@ -1,0 +1,16 @@
+- name: install desktop environment (xfce)
+  tags: packages,desktop
+  package:
+    name:
+      - task-xfce-desktop
+      - diodon
+      - firefox-esr
+      - firefox-esr-l10n-en-ca
+      - lightdm-gtk-greeter
+      - package-update-indicator  
+      - plymouth-themes 
+      - plymouth-x11
+      - wmctrl
+      - xdotool
+    state: latest
+  when: ansible_distribution == "Debian"

@@ -1,0 +1,42 @@
+---
+- name: install openbox
+  tags: packages,openbox,workstation
+  package:
+    name:
+      - openbox
+      - obconf
+      - menu
+      - dbus-x11
+      - default-jre
+      - diodon
+      - dunst
+      - feh
+      - gnome-themes-standard
+      - gstreamer1.0-plugins-ugly
+      - gtk2-engines-murrine
+      - gtk2-engines-pixbuf
+      - hsetroot
+      - i3lock
+      - libncurses5-dev
+      - libnotify-bin
+      - lxappearance
+      - module-assistant
+      - network-manager
+      - network-manager-gnome
+      - papirus-icon-theme
+      - pulseaudio
+      - pulseaudio-utils
+      - scrot
+      - tint2
+      - viewnior
+      - volumeicon-alsa
+      - xorg
+      - xbacklight
+      - xbindkeys
+      - xfce4-power-manager
+      - xfce4-terminal  
+      - xvkbd
+      - xinput
+      - xserver-xorg-input-all
+    state: latest
+  when: ansible_distribution == "Debian"

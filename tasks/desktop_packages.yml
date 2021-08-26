@@ -1,0 +1,29 @@
+- name: install desktop packages
+  tags: packages,desktop
+  package:
+    name:
+      - build-essential
+      - dconf-editor  
+      - dkms  
+      - ffmpeg
+      - fonts-dejavu  
+      - fonts-firacode
+      - fonts-ubuntu
+      - geeqie
+      - gimp
+      - gimp-help-en
+      - gimp-data-extras
+      - hunspell-en-ca
+      - jmtpfs  
+      - libreoffice
+      - libreoffice-help-en-us
+      - pavucontrol
+      - qpdfview
+      - qt5-style-plugins
+      - rhythmbox
+      - rofi
+      - shellcheck  
+      - thunderbird
+      - transmission-gtk  
+      - vlc
+    state: latest
