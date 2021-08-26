@@ -4,10 +4,10 @@
   become: true
 
   pre_tasks:
-  - name: update repository
-    apt:
-      update_cache: yes
-    change_when: Fales
+    - name: update repository
+      apt:
+        update_cache: yes
+      change_when: Fales
 
   tasks:
     - include: tasks/users.yml
