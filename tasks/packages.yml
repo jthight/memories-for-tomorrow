@@ -1,0 +1,8 @@
+- name: install packages
+  apt:
+    name:
+      - htop
+      - tmux
+      - vim-nox
+      - dconf-cli
+      - python3-psutil

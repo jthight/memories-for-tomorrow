@@ -3,12 +3,13 @@
   connection: local
   become: true
 
+  pre_tasks:
+  - name: update repository
+    apt:
+      update_cache: yes
+    change_when: Fales
+
   tasks:
-  - name: install packages
-    package:
-      name:
-        - htop
-        - tmux
-        - vim-nox
-        - dconf-cli
-        - python3-psutil
+    - include: tasks/users.yml
+    - include: tasks/cron.yml
+    - include: tasks/packages.yml
