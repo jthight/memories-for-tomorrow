@@ -1,15 +1,34 @@
 ---
+
 - hosts: localhost
   connection: local
   become: true
 
+  vars:
+      ansible_shell_allow_world_readable_temp: true 
+      ssh_users: "john"
+
   pre_tasks:
-    - name: update repository
+    - name: update/upgrade system
+      tags: always,apt
       apt:
+        upgrade: dist
         update_cache: yes
-      change_when: Fales
+      changed_when: false
 
   tasks:
     - include: tasks/users.yml
     - include: tasks/cron.yml
     - include: tasks/packages.yml
+
+  handlers:
+    - name: apt_update
+      apt:
+        update_cache: yes
+    - name: restart_sshd
+      service:
+        name: sshd
+        state: restarted
+    - name: update_grub
+      shell:
+        cmd: update-grub
