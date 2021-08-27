@@ -17,6 +17,7 @@
       - htop
       - keychain
       - mlocate
+      - mosh
       - neofetch
       - neovim
       - net-tools
@@ -29,10 +30,13 @@
       - speedtest-cli
       - sudo  
       - tmux
+      - tree
       - unzip
       - vim-nox
       - wget
-      - whois  
+      - whois
+      - wireguard
+      - wireguard-tools 
     state: latest
     update_cache: yes
 

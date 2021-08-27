@@ -8,7 +8,7 @@
       - logwatch
       - newsboat
       - nmap
-      - vbetool  
+      - resolvconf
       - unattended-upgrades
     state: latest
 
