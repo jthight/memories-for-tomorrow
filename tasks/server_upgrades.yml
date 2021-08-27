@@ -11,7 +11,7 @@
 - name: copy 50unattended-upgrades for ubuntu
   tags: apt,settings,server
   copy:
-    src: files/etc/apt/apt.conf.d/uduntu/50unattended-upgrades
+    src: files/etc/apt/apt.conf.d/ubuntu/50unattended-upgrades
     dest: /etc/apt/apt.conf.d/50unattended-upgrades
     owner: root
     group: root
@@ -21,7 +21,7 @@
 - name: copy 20auto-upgrades for ubuntu
   tags: apt,settings,server
   copy:
-    src: files/etc/apt/apt.conf.d/uduntu/20auto-upgrades
+    src: files/etc/apt/apt.conf.d/ubuntu/20auto-upgrades
     dest: /etc/apt/apt.conf.d/20auto-upgrades
     owner: root
     group: root
