@@ -4,4 +4,4 @@
     user: ansible
     name: "ansible provision"
     minute: "*/10"
-    job: "/usr/bin/ansible-pull -o -U https://github.com/jthight/memories-for-tomorrow.git local-server.yml > /dev/null"
+    job: "ansible-pull -o -U https://github.com/jthight/memories-for-tomorrow.git local-server.yml > /dev/null"
