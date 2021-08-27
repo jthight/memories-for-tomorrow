@@ -26,8 +26,8 @@ Unattended-Upgrade::Origins-Pattern {
         // archives (e.g. from testing to stable and later oldstable).
         // Software will be the latest available for the named release,
         // but the Debian release itself will not be automatically upgraded.
-        "origin=Debian,codename=${distro_codename}-updates";
-        "origin=Debian,codename=${distro_codename}-proposed-updates";
+//      "origin=Debian,codename=${distro_codename}-updates";
+//      "origin=Debian,codename=${distro_codename}-proposed-updates";
         "origin=Debian,codename=${distro_codename},label=Debian";
         "origin=Debian,codename=${distro_codename},label=Debian-Security";
 
@@ -38,7 +38,7 @@ Unattended-Upgrade::Origins-Pattern {
 //      "o=Debian,a=stable";
 //      "o=Debian,a=stable-updates";
 //      "o=Debian,a=proposed-updates";
-        "o=Debian Backports,a=${distro_codename}-backports,l=Debian Backports";
+//      "o=Debian Backports,a=${distro_codename}-backports,l=Debian Backports";
 };
 
 // Python regular expressions, matching packages to exclude from upgrading
@@ -90,7 +90,7 @@ Unattended-Upgrade::Package-Blacklist {
 // If empty or unset then no email is sent, make sure that you
 // have a working mail setup on your system. A package that provides
 // 'mailx' must be installed. E.g. "user@example.com"
-Unattended-Upgrade::Mail "root";
+//Unattended-Upgrade::Mail "";
 
 // Set this value to "true" to get emails only on errors. Default
 // is to always send a mail if Unattended-Upgrade::Mail is set
@@ -105,7 +105,7 @@ Unattended-Upgrade::Mail "root";
 
 // Do automatic removal of unused packages after the upgrade
 // (equivalent to apt-get autoremove)
-Unattended-Upgrade::Remove-Unused-Dependencies "true";
+//Unattended-Upgrade::Remove-Unused-Dependencies "false";
 
 // Automatically reboot *WITHOUT CONFIRMATION* if
 //  the file /var/run/reboot-required is found after the upgrade
@@ -118,7 +118,7 @@ Unattended-Upgrade::Remove-Unused-Dependencies "true";
 // If automatic reboot is enabled and needed, reboot at the specific
 // time instead of immediately
 //  Default: "now"
-Unattended-Upgrade::Automatic-Reboot-Time "02:30";
+//Unattended-Upgrade::Automatic-Reboot-Time "02:00";
 
 // Use apt bandwidth limit feature, this example limits the download
 // speed to 70kb/sec
@@ -132,7 +132,7 @@ Unattended-Upgrade::Automatic-Reboot-Time "02:30";
 
 // Download and install upgrades only on AC power
 // (i.e. skip or gracefully stop updates on battery)
-//Unattended-Upgrade::OnlyOnACPower "false";
+// Unattended-Upgrade::OnlyOnACPower "true";
 
 // Download and install upgrades only on non-metered connection
 // (i.e. skip or gracefully stop updates on a metered connection)

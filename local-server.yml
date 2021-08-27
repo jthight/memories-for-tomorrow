@@ -10,7 +10,7 @@
 
   vars:
       ansible_shell_allow_world_readable_temp: true 
-      ssh_users: "dwa"
+      ssh_users: "john"
 
   pre_tasks:
     - name: update/upgrade system
@@ -21,12 +21,12 @@
       changed_when: false
 
   tasks:
-    - include: tasks/base_sources.yml
     - include: tasks/base_packages.yml
     - include: tasks/base_users.yml
     - include: tasks/base_fstrim.yml
     - include: tasks/server_packages.yml
     - include: tasks/server_upgrades.yml
+    - include: tasks/server_cron.yml
 
   handlers:
     - name: apt_update

@@ -1,9 +1,29 @@
 - name: copy 50unattended-upgrades for debian
   tags: apt,settings,server
   copy:
-    src: files/etc/apt/apt.conf.d/50unattended-upgrades
+    src: files/etc/apt/apt.conf.d/debian/50unattended-upgrades
     dest: /etc/apt/apt.conf.d/50unattended-upgrades
     owner: root
     group: root
     mode: 0644
   when: ansible_distribution == "Debian"
+
+- name: copy 50unattended-upgrades for ubuntu
+  tags: apt,settings,server
+  copy:
+    src: files/etc/apt/apt.conf.d/uduntu/50unattended-upgrades
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution == "Ubuntu"
+
+- name: copy 20auto-upgrades for ubuntu
+  tags: apt,settings,server
+  copy:
+    src: files/etc/apt/apt.conf.d/uduntu/20auto-upgrades
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_distribution == "Ubuntu"

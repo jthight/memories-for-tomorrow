@@ -4,6 +4,7 @@
     name:
       - build-essential
       - dconf-editor  
+      - dconf-cli
       - dkms  
       - ffmpeg
       - fonts-dejavu  

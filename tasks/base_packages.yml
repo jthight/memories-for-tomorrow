@@ -15,8 +15,6 @@
       - git
       - gnupg
       - htop
-      - amd64-microcode  
-      - intel-microcode
       - keychain
       - mlocate
       - neofetch
@@ -25,12 +23,14 @@
       - newsboat        
       - openssh-server
       - pmount
+      - python3-psutil
       - rsync  
       - sl
       - speedtest-cli
       - sudo  
       - tmux
       - unzip
+      - vim-nox
       - wget
       - whois  
     state: latest

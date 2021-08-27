@@ -1,8 +1,17 @@
-- name: copy sudoers_dwa
+- name: copy sudoers_john
   tags: sudo,settings,users,base
   copy:
-    src: files/etc/sudoers.d/sudoers_dwa
-    dest: /etc/sudoers.d/dwa
+    src: files/etc/sudoers.d/sudoers_john
+    dest: /etc/sudoers.d/john
+    owner: root
+    group: root
+    mode: 0440
+
+- name: copy sudoers_ansible
+  tags: sudo,settings,users,base
+  copy:
+    src: files/etc/sudoers.d/sudoers_ansible
+    dest: /etc/sudoers.d/ansible
     owner: root
     group: root
     mode: 0440
