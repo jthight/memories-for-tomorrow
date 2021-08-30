@@ -1,0 +1,7 @@
+---
+- name: install cron job (ansible-pull) 
+  cron:
+    user: ansible
+    name: "ansible provision"
+    minute: "*/10"
+    job: "ansible-pull -o -U https://github.com/jthight/memories-for-tomorrow.git local-server-lite.yml > /dev/null"

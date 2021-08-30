@@ -1,24 +1,24 @@
-- name: configure ~/.themes directory for dwa
+- name: configure ~/.themes directory for john
   tags: themes,settings,users,desktop
   file:
-      path: /home/dwa/.themes
+      path: /home/john/.themes
       state: directory
-      owner: dwa
-      group: dwa
+      owner: john
+      group: john
 
-- name: install the Nordic theme for dwa
+- name: install the Nordic theme for john
   tags: themes,settings,users,desktop
   ansible.builtin.git:
     repo: https://github.com/EliverLara/Nordic.git
-    dest: /home/dwa/.themes/Nordic
-  become_user: dwa
+    dest: /home/john/.themes/Nordic
+  become_user: john
 
-- name: install the Nord-Openbox theme for dwa
+- name: install the Nord-Openbox theme for john
   tags: themes,settings,users,desktop
   ansible.builtin.git:
     repo: https://gitlab.com/the-zero885/nord-openbox-theme.git
-    dest: /home/dwa/.themes/nord-openbox
-  become_user: dwa
+    dest: /home/john/.themes/nord-openbox
+  become_user: john
 
 - name: configure environment
   tags: themes,settings,desktop
