@@ -13,10 +13,9 @@
       ssh_users: "john"
 
   pre_tasks:
-    - name: update/upgrade system
+    - name: update repositories
       tags: always,apt
       apt:
-        upgrade: dist
         update_cache: yes
       changed_when: false
 
