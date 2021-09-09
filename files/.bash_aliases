@@ -3,13 +3,17 @@
 # Version Date .bash_aliases
 # Ansible copied file .bash_aliases
 
-alias a-v='echo "Version 20210906"'
+alias a-v='echo "Version 20210909"'
 # Long format list
 alias ll="ls -la"
 ## Show hidden files ##
 alias l.='ls -d .* --color=auto'
 # Display the directory structure better.
 alias tree='tree --dirsfirst -F'
+
+# update dot files
+alias pulldots='sudo ansible-pull -U
+https://github.com/jthight/memories-for-tomorrow.git local-dotfiles.yml'
 
 # Print my public IP
 alias myip='curl ipinfo.io/ip'
