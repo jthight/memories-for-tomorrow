@@ -12,8 +12,7 @@ alias l.='ls -d .* --color=auto'
 alias tree='tree --dirsfirst -F'
 
 # update dot files
-alias pulldots='sudo ansible-pull -U
-https://github.com/jthight/memories-for-tomorrow.git local-dotfiles.yml'
+alias pulldots='sudo ansible-pull -U https://github.com/jthight/memories-for-tomorrow.git local-dotfiles.yml'
 
 # Print my public IP
 alias myip='curl ipinfo.io/ip'
