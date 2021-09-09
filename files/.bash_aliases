@@ -1,9 +1,9 @@
 # Aliases
 # alias alias_name="command_to_run"
 # Version Date .bash_aliases
-alias a-v='echo "Version 20210825"'
-# Added VIA Ansible
+# Ansible copied file .bash_aliases
 
+alias a-v='echo "Version 20210906"'
 # Long format list
 alias ll="ls -la"
 ## Show hidden files ##
@@ -103,7 +103,10 @@ alias cpuinfo='lscpu | less -m'
 # scp-aliases - copy .bash_aliases or bashrc file to update from master
 alias scp-alias="scp john@192.168.1.7:/home/john/.bash_aliases ~/"
 alias scp-bashrc="scp john@192.168.1.7:/home/john/.bashrc ~/"
- 
+
+# ssh-agent with ssh-add
+alias ssha="eval $(ssh-agent) && ssh-add"
+
 # Update root .bashrc and .bash_aliases files
 _uid="$(id -u)"
 if [ $_uid = "0" ]; then
@@ -158,3 +161,21 @@ mkcd ()
 {
   mkdir -p -- "$1" && cd -P -- "$1"
 }
+
+# clone user
+clone-user ()
+{
+SRC=$1
+DEST=$2
+
+SRC_GROUPS=$(id -Gn ${SRC} | sed "s/ /,/g" | sed -r 's/\<'${SRC}'\>\b,?//g')
+SRC_SHELL=$(awk -F : -v name=${SRC} '(name == $1) { print $7 }' /etc/passwd)
+
+sudo useradd --groups ${SRC_GROUPS} --shell ${SRC_SHELL} --create-home ${DEST}
+sudo passwd ${DEST}
+sudo cp -r /home/${SRC}/.ssh/ /home/${DEST}/
+sudo cp /home/${SRC}/.bash{rc,_aliases} /home/${DEST}/
+sudo chown -R ${DEST}:${DEST} /home/${DEST}/
+sudo ls -al /home/${DEST}/
+}
+

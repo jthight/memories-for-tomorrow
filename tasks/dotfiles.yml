@@ -1,0 +1,33 @@
+---
+- name: Copy .bashrc for user home dir
+  copy:
+    src: files/.bashrc
+    dest: /home/john/.bashrc
+    owner: john
+    group: john
+    mode: 0664
+    backup: yes
+- name: Copy .bash_aliases for user home dir
+  copy:
+    src: files/.bash_aliases
+    dest: /home/john/.bash_aliases
+    owner: john
+    group: john
+    mode: 0664
+    backup: yes
+- name: Copy .tmux.conf for user home dir
+  copy:
+    src: files/.tmux.conf
+    dest: /home/john/.tmux.conf
+    owner: john
+    group: john
+    mode: 0664
+    backup: yes
+- name: Copy .vimrc for user home dir
+  copy:
+    src: files/.vimrc
+    dest: /home/john/.vimrc
+    owner: john
+    group: john
+    mode: 0664
+    backup: yes

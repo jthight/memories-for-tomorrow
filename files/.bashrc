@@ -2,8 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 # Version Date .bashrc
-alias b-v='echo "Version 20210824"'
-# Added VIA Ansible
+# Ansible copied file .bashrc
+
+alias b-v='echo "Version 20210906"'
 
 # If not running interactively, don't do anything
 case $- in
