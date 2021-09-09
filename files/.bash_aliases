@@ -67,6 +67,8 @@ alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
 alias bk='cd -'
 alias cd~='cd ~'
+alias ~='cd ~'
+alias home='cd ~'
 
 # ports - List all open ports
 alias ports='netstat -tulanp'
