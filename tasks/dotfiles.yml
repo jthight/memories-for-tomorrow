@@ -31,3 +31,11 @@
     group: john
     mode: 0664
     backup: yes
+- name: Copy .gitconfig for user home dir
+  copy:
+    src: files/.gitconfig
+    dest: /home/john/.gitconfig
+    owner: john
+    group: john
+    mode: 0664
+    backup: yes
