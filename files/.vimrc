@@ -4,22 +4,18 @@ set nocompatible
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-" TODO: Load plugins here (pathogen or vundle)
-
 " Turn on syntax highlighting
 syntax on
 
 " For plugins to load correctly
 filetype plugin indent on
 
-" TODO: Pick a leader key
-" let mapleader = ","
-
 " Security
 set modelines=0
 
 " Show line numbers
-" set number
+set number
+set relativenumber
 
 " Show file stats
 set ruler
@@ -31,8 +27,10 @@ set visualbell
 set encoding=utf-8
 
 " Whitespace
-set wrap
-set textwidth=79
+set nowrap
+set textwidth=80
+set colorcolumn=80
+set signcolumn=yes
 set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
@@ -41,7 +39,7 @@ set expandtab
 set noshiftround
 
 " Cursor motion
-set scrolloff=3
+set scrolloff=8
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
@@ -64,14 +62,24 @@ set showmode
 set showcmd
 
 " Searching
-" nnoremap / /\v
-" vnoremap / /\v
-set hlsearch
+set nohlsearch
 set incsearch
 set ignorecase
 set smartcase
 set showmatch
+
+" leader key mapping
+"
+" Pick a leader key
+let mapleader = " "
+" leader key strokes
 map <leader><space> :let @/=''<cr> " clear search
+map <leader>w :set wrap<cr>
+map <leader>e :set nowrap<cr>
+map <leader>s :source %<cr>
+map <leader>p :PlugInstall<cr>
+" Formatting
+map <leader>q gqip
 
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
@@ -80,8 +88,6 @@ vnoremap <F1> :set invfullscreen<CR>
 
 " Textmate holdouts
 
-" Formatting
-map <leader>q gqip
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -90,11 +96,7 @@ set listchars=tab:▸\ ,eol:¬
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
-" Color scheme (terminal)
-set t_Co=256
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
-" in ~/.vim/colors/ and uncomment:
-" colorscheme solarized
+" load .vimrc-sys if present
+if !empty(glob("~/.vimrc-sys"))
+  source ~/.vimrc-sys
+endif

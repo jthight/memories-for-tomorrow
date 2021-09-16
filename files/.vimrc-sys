@@ -1,0 +1,51 @@
+" ~/.vimrc-sys contains system spacific vim directives
+" Color scheme (terminal)
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
+" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
+" in ~/.vim/colors/ and uncomment:
+colorscheme solarized
+
+" Vim-Plug plugin manager
+call plug#begin()
+
+Plug 'https://github.com/junegunn/vim-github-dashboard.git' 
+Plug 'junegunn/vim-easy-align'
+Plug 'tyru/open-browser.vim' " opens url in browser
+Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+Plug 'https://github.com/preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'preservim/nerdcommenter' " Comment test in/out
+Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
+Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
+Plug 'chriskempson/base16-vim' " Color package for vim
+Plug 'https://github.com/tpope/vim-repeat.git'
+Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
+Plug 'christoomey/vim-titlecase'
+Plug 'christoomey/vim-sort-motion'
+ 
+call plug#end()
+
+" NERDTree Activate
+map <leader>n :NERDTree<cr>
+
+" NERDcommenter settings
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Vim 'Titlecase' settings 'christoomey/vim-titlecase'
+
+" Sort Motion.vim 'christoomey/vim-sort-motion'
+let g:sort_motion_flags = 'ui'
+let g:sort_motion_visual_block_command = 'Vissort'
+
+" Support code for Plugs
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
