@@ -31,6 +31,7 @@
       - sudo  
       - tmux
       - tree
+      - universal-ctags
       - unzip
       - vim-nox
       - wget
