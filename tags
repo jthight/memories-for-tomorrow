@@ -1,0 +1,85 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+0. Definitions.	LICENSE.md	/^#### 0. Definitions.$/;"	t
+1. Source Code.	LICENSE.md	/^#### 1. Source Code.$/;"	t
+10. Automatic Licensing of Downstream Recipients.	LICENSE.md	/^#### 10. Automatic Licensing of Downstream Recipients.$/;"	t
+11. Patents.	LICENSE.md	/^#### 11. Patents.$/;"	t
+12. No Surrender of Others' Freedom.	LICENSE.md	/^#### 12. No Surrender of Others' Freedom.$/;"	t
+13. Use with the GNU Affero General Public License.	LICENSE.md	/^#### 13. Use with the GNU Affero General Public License.$/;"	t
+14. Revised Versions of this License.	LICENSE.md	/^#### 14. Revised Versions of this License.$/;"	t
+15. Disclaimer of Warranty.	LICENSE.md	/^#### 15. Disclaimer of Warranty.$/;"	t
+16. Limitation of Liability.	LICENSE.md	/^#### 16. Limitation of Liability.$/;"	t
+17. Interpretation of Sections 15 and 16.	LICENSE.md	/^#### 17. Interpretation of Sections 15 and 16.$/;"	t
+2. Basic Permissions.	LICENSE.md	/^#### 2. Basic Permissions.$/;"	t
+3. Protecting Users' Legal Rights From Anti-Circumvention Law.	LICENSE.md	/^#### 3. Protecting Users' Legal Rights From Anti-Circumvention Law.$/;"	t
+4. Conveying Verbatim Copies.	LICENSE.md	/^#### 4. Conveying Verbatim Copies.$/;"	t
+5. Conveying Modified Source Versions.	LICENSE.md	/^#### 5. Conveying Modified Source Versions.$/;"	t
+6. Conveying Non-Source Forms.	LICENSE.md	/^#### 6. Conveying Non-Source Forms.$/;"	t
+7. Additional Terms.	LICENSE.md	/^#### 7. Additional Terms.$/;"	t
+8. Termination.	LICENSE.md	/^#### 8. Termination.$/;"	t
+9. Acceptance Not Required for Having Copies.	LICENSE.md	/^#### 9. Acceptance Not Required for Having Copies.$/;"	t
+<F1>	files/.vimrc	/^inoremap <F1> <ESC>:set invfullscreen<CR>a$/;"	m
+<F1>	files/.vimrc	/^nnoremap <F1> :set invfullscreen<CR>$/;"	m
+<F1>	files/.vimrc	/^vnoremap <F1> :set invfullscreen<CR>$/;"	m
+<leader><space>	files/.vimrc	/^map <leader><space> :let @\/=''<cr> " clear search$/;"	m
+<leader>e	files/.vimrc	/^map <leader>e :set nowrap<cr>$/;"	m
+<leader>l	files/.vimrc	/^map <leader>l :set list!<CR> " Toggle tabs and EOL$/;"	m
+<leader>p	files/.vimrc	/^map <leader>p :PlugInstall<cr>$/;"	m
+<leader>q	files/.vimrc	/^map <leader>q gqip$/;"	m
+<leader>s	files/.vimrc	/^map <leader>s :source %<cr>$/;"	m
+<leader>w	files/.vimrc	/^map <leader>w :set wrap<cr>$/;"	m
+Copy .bash_aliases for user home dir	tasks/dotfiles.yml	/^- name: Copy .bash_aliases for user home dir$/;"	p
+Copy .bash_aliases for user home dir	tasks/rootdotfiles.yml	/^- name: Copy .bash_aliases for user home dir$/;"	p
+Copy .bashrc for user home dir	tasks/dotfiles.yml	/^- name: Copy .bashrc for user home dir$/;"	p
+Copy .bashrc for user home dir	tasks/rootdotfiles.yml	/^- name: Copy .bashrc for user home dir$/;"	p
+Copy .gitconfig for user home dir	tasks/dotfiles.yml	/^- name: Copy .gitconfig for user home dir$/;"	p
+Copy .tmux.conf for user home dir	tasks/dotfiles.yml	/^- name: Copy .tmux.conf for user home dir$/;"	p
+Copy .tmux.conf for user home dir	tasks/rootdotfiles.yml	/^- name: Copy .tmux.conf for user home dir$/;"	p
+Copy .vimrc for user home dir	tasks/dotfiles.yml	/^- name: Copy .vimrc for user home dir$/;"	p
+Copy .vimrc for user home dir	tasks/rootdotfiles.yml	/^- name: Copy .vimrc for user home dir$/;"	p
+GNU GENERAL PUBLIC LICENSE	LICENSE.md	/^### GNU GENERAL PUBLIC LICENSE$/;"	S
+How to Apply These Terms to Your New Programs	LICENSE.md	/^### How to Apply These Terms to Your New Programs$/;"	S
+LightDM	files/etc/lightdm/lightdm.conf	/^[LightDM]$/;"	s
+Preamble	LICENSE.md	/^### Preamble$/;"	S
+Seat:*	files/etc/lightdm/lightdm.conf	/^[Seat:*]$/;"	s
+Seat:*	files/usr/share/lightdm/lightdm.conf.d/01_debian.conf	/^[Seat:*]$/;"	s
+TERMS AND CONDITIONS	LICENSE.md	/^### TERMS AND CONDITIONS$/;"	S
+VNCServer	files/etc/lightdm/lightdm.conf	/^[VNCServer]$/;"	s
+XDMCPServer	files/etc/lightdm/lightdm.conf	/^[XDMCPServer]$/;"	s
+add ansible user	tasks/base_users.yml	/^- name: add ansible user$/;"	p
+configure environment	tasks/desktop_themes.yml	/^- name: configure environment$/;"	p
+configure lightdm	tasks/desktop_lightdm.yml	/^- name: configure lightdm$/;"	p
+configure lightdm-debian	tasks/desktop_lightdm.yml	/^- name: configure lightdm-debian$/;"	p
+configure lightdm-gtk-greeter	tasks/desktop_lightdm.yml	/^- name: configure lightdm-gtk-greeter$/;"	p
+configure ~/.themes directory for john	tasks/desktop_themes.yml	/^- name: configure ~\/.themes directory for john$/;"	p
+copy 20auto-upgrades for ubuntu	tasks/server_upgrades.yml	/^- name: copy 20auto-upgrades for ubuntu$/;"	p
+copy 50unattended-upgrades for debian	tasks/server_upgrades.yml	/^- name: copy 50unattended-upgrades for debian$/;"	p
+copy 50unattended-upgrades for ubuntu	tasks/server_upgrades.yml	/^- name: copy 50unattended-upgrades for ubuntu$/;"	p
+copy sudoers_ansible	tasks/base_users.yml	/^- name: copy sudoers_ansible$/;"	p
+copy sudoers_john	tasks/base_users.yml	/^- name: copy sudoers_john$/;"	p
+enable periodic trim for ssd	tasks/base_fstrim.yml	/^- name: enable periodic trim for ssd$/;"	p
+greeter	files/etc/lightdm/lightdm-gtk-greeter.conf	/^[greeter]$/;"	s
+install base packages	tasks/base_packages.yml	/^- name: install base packages$/;"	p
+install cron job (ansible-pull)	tasks/desktop_cron.yml	/^- name: install cron job (ansible-pull) $/;"	p
+install cron job (ansible-pull)	tasks/server_cron.yml	/^- name: install cron job (ansible-pull) $/;"	p
+install cron job (ansible-pull)	tasks/server_lite_cron.yml	/^- name: install cron job (ansible-pull) $/;"	p
+install desktop environment (xfce)	tasks/desktop_xfce.yml	/^- name: install desktop environment (xfce)$/;"	p
+install desktop packages	tasks/desktop_packages.yml	/^- name: install desktop packages$/;"	p
+install openbox	tasks/desktop_openbox.yml	/^- name: install openbox$/;"	p
+install server packages	tasks/server_packages.yml	/^- name: install server packages$/;"	p
+install the Nord-Openbox theme for john	tasks/desktop_themes.yml	/^- name: install the Nord-Openbox theme for john$/;"	p
+install the Nordic theme for john	tasks/desktop_themes.yml	/^- name: install the Nordic theme for john$/;"	p
+j	files/.vimrc	/^nnoremap j gj$/;"	m
+k	files/.vimrc	/^nnoremap k gk$/;"	m
+mapleader	files/.vimrc	/^let mapleader = " "$/;"	v
+memories-for-tomorrow - Hello today is Wednesday 20210825	README.md	/^# memories-for-tomorrow - Hello today is Wednesday 20210825$/;"	c
+name	files/etc/lightdm/lightdm-gtk-greeter.conf	/^theme-name=Adwaita-dark$/;"	k	section:greeter
+session	files/usr/share/lightdm/lightdm.conf.d/01_debian.conf	/^greeter-session=lightdm-greeter$/;"	k	section:Seat:*
+users	files/etc/lightdm/lightdm.conf	/^greeter-hide-users=false$/;"	k	section:Seat:*
+users	files/usr/share/lightdm/lightdm.conf.d/01_debian.conf	/^greeter-hide-users=false$/;"	k	section:Seat:*
+wrapper	files/usr/share/lightdm/lightdm.conf.d/01_debian.conf	/^session-wrapper=\/etc\/X11\/Xsession$/;"	k	section:Seat:*
