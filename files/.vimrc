@@ -201,6 +201,8 @@ let g:UltiSnipsListSnippets="<c-l>"
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+" Status bar look
+let g:airline_theme='apprentice'
 
 "____________________________________________________________________________
 " Linux system spacific stuff
@@ -219,4 +221,3 @@ colorscheme solarized
 if !empty(glob("~/.vimrc-sys"))
   source ~/.vimrc-sys
 endif
-
