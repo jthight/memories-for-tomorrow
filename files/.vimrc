@@ -107,7 +107,7 @@ let mapleader = " "
 map <leader><space> :let @/=''<cr> " clear search
 map <leader>w :set wrap<cr>
 map <leader>e :set nowrap<cr>
-map <leader>s :source %<cr>
+map <leader>s :source ~/.vimrc<cr>
 map <leader>p :PlugInstall<cr>
 " Formatting
 map <leader>q gqip
@@ -129,7 +129,6 @@ Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
 Plug 'preservim/nerdcommenter' " Comment test in/out
 Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
 Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
-Plug 'chriskempson/base16-vim' " Color package for vim
 Plug 'https://github.com/tpope/vim-repeat.git'
 Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
 Plug 'christoomey/vim-titlecase'
@@ -176,9 +175,6 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Vim Titlecase settings 'christoomey/vim-titlecase'
-
-
 " Sort Motion.vim 'christoomey/vim-sort-motion' 
 let g:sort_motion_flags = 'ui'
 let g:sort_motion_visual_block_command = 'Vissort'
@@ -188,10 +184,13 @@ let g:sort_motion_visual_block_command = 'Vissort'
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsSnippetsDir = $HOME.'/vimfiles/plugged/vim-snippets/UltiSnips'
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsSnippetsDirectories=["UltiSnips"]
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEnableSnipMate=1
+let g:snips_author="John Hight"
 " Key to activate snipps
 " let g:UltiSnipsExpandTrigger="<tab>"
 " list all snippets for current filetype
@@ -201,9 +200,9 @@ let g:UltiSnipsListSnippets="<c-l>"
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
 " Status bar look
 let g:airline_theme='apprentice'
-
 "____________________________________________________________________________
 " Linux system spacific stuff
 "
@@ -215,9 +214,11 @@ let g:solarized_termtrans=1
 " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 " in ~/.vim/colors/ and uncomment:
 colorscheme solarized
+" colorscheme base16-gruvbox-dark-medium
 
 " ~/.vimrc-sys contains system spacific vim directives
 " load .vimrc-sys if present
 if !empty(glob("~/.vimrc-sys"))
   source ~/.vimrc-sys
 endif
+
