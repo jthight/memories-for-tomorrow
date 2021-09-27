@@ -1,3 +1,8 @@
+" File: .vimrc
+" Author: John Hight
+" Description: vimrc for Linux systems
+" Last Modified: September 27, 2021
+"
 " Don't try to be vi compatible
 set nocompatible
 
@@ -122,7 +127,7 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 " Vim-Plug plugin manager
 call plug#begin()
 
-Plug 'https://github.com/junegunn/vim-github-dashboard.git' 
+Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'junegunn/vim-easy-align'
 Plug 'tyru/open-browser.vim' " opens url in browser
 Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
@@ -191,6 +196,8 @@ let g:UltiSnipsSnippetsDirectories=["UltiSnips"]
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsEnableSnipMate=1
 let g:snips_author="John Hight"
+let g:snips_email="john@hight.net"
+let g:snips_github="https://github.com/jthight"
 " Key to activate snipps
 " let g:UltiSnipsExpandTrigger="<tab>"
 " list all snippets for current filetype
@@ -211,10 +218,7 @@ set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
-" in ~/.vim/colors/ and uncomment:
 colorscheme solarized
-" colorscheme base16-gruvbox-dark-medium
 
 " ~/.vimrc-sys contains system spacific vim directives
 " load .vimrc-sys if present
