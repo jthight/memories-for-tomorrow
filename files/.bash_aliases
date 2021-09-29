@@ -1,9 +1,14 @@
+" File: .bash_aliases
+" Author: John Hight
+" Description: .bash_aliases for Linux systems
+" Last Modified: September 29, 2021
+"
 # Aliases
 # alias alias_name="command_to_run"
 # Version Date .bash_aliases
 # Ansible copied file .bash_aliases
 
-alias a-v='echo "Version 20210909"'
+alias a-v='echo "Version 20210929"'
 # Long format list
 alias ll="ls -la"
 ## Show hidden files ##
@@ -106,8 +111,8 @@ alias pscpu10='ps auxf | egrep ^USER && ps auxf | egrep -v ^USER | sort -nr -k 3
 alias cpuinfo='lscpu | less -m'
 
 # scp-aliases - copy .bash_aliases or bashrc file to update from master
-alias scp-alias="scp john@192.168.1.7:/home/john/.bash_aliases ~/"
-alias scp-bashrc="scp john@192.168.1.7:/home/john/.bashrc ~/"
+alias scp-alias="scp john@192.168.1.15:/home/john/.bash_aliases ~/"
+alias scp-bashrc="scp john@192.168.1.15:/home/john/.bashrc ~/"
 
 # ssh-agent with ssh-add
 alias ssha="eval $(ssh-agent) && ssh-add"
