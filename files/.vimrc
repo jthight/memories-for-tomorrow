@@ -171,7 +171,7 @@ function! ToggleVExplorer()
           unlet t:expl_buf_num
       endif
   else
-      exec '1wincmd w'
+      exec 'wincmd w'
       let g:netrw_winsize = 30
       Vexplore
       let t:expl_buf_num = bufnr("%")
