@@ -113,7 +113,7 @@ map <leader><space> :let @/=''<cr> " clear search
 map <leader>w :set wrap<cr>
 map <leader>e :set nowrap<cr>
 map <leader>s :source ~/.vimrc<cr>
-map <leader>p :PlugInstall<cr>
+map <leader>p :PlugUpdate<cr>
 " Formatting
 map <leader>q gqip
 map <leader>z :setlocal spell spelllang=en_us<CR> " Spellcheck
