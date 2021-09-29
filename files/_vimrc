@@ -1,7 +1,7 @@
 " File: _vimrc
 " Author: John Hight
 " Description: _vimrc for wimdows gvim and vim
-" Last Modified: September 26, 2021
+" Last Modified: September 29, 2021
 " 
 " Don't try to be vi compatible
 set nocompatible
@@ -25,11 +25,11 @@ command! MakeTags !ctags -R .
 " Open the current file in the default browser`
 command! OpenBrowserCurrent execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')
 "
-" AUTOCOMPLETE:
+" AUTO COMPLETE:
 " The good stuff is documented in |ins-completion|
 " HIGHLIGHTS:
 " - ^x^n for JUST this file
-" - ^x^f for filenames (works with our path trick!)
+" - ^x^f for file names (works with our path trick!)
 " - ^x^] for tags only
 " - ^n for anything specified by the 'complete' option
 " NOW WE CAN:
@@ -72,6 +72,7 @@ set colorcolumn=80
 set signcolumn=no " Left column display debug indicators
 set formatoptions=tcqrn1
 set tabstop=2
+autocmd FileType python setlocal tabstop=4
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -81,7 +82,6 @@ set noshiftround
 set scrolloff=8
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
-runtime! macros/matchit.vim
 
 " Move up/down editor lines
 nnoremap j gj
@@ -119,6 +119,12 @@ map <leader>s :source ~\_vimrc<cr>
 map <leader>p :PlugInstall<cr>
 " Formatting
 map <leader>q gqip
+map <leader>z :setlocal spell spelllang=en_us<CR> " Spellcheck
+map <leader>Z :set nospell<CR> " Turn Off Spellcheck
+map <leader>7 :UltiSnipsEdit<CR> "Edit snippets
+
+" Map Function Keys <FN> 
+" <F1> mapped to :help by default
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -130,6 +136,7 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 " Vim-Plug plugin manager
 call plug#begin()
 
+Plug 'https://github.com/adelarsq/vim-matchit'
 Plug 'junegunn/vim-easy-align'
 Plug 'tyru/open-browser.vim' " opens url in browser
 Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
@@ -193,8 +200,8 @@ let g:sort_motion_visual_block_command = 'Vissort'
 " - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsListSnippets="<C-L>"
 let g:UltiSnipsSnippetsDirectories=["UltiSnips"]
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsEnableSnipMate=1

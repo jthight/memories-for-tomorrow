@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: John Hight
 " Description: vimrc for Linux systems
-" Last Modified: September 27, 2021
+" Last Modified: September 29, 2021
 "
 " Don't try to be vi compatible
 set nocompatible
@@ -69,6 +69,7 @@ set colorcolumn=80
 set signcolumn=no " Show error indicators on left column
 set formatoptions=tcqrn1
 set tabstop=2
+autocmd FileType python setlocal tabstop=4
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -78,7 +79,6 @@ set noshiftround
 set scrolloff=8
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
-runtime! macros/matchit.vim
 
 " Move up/down editor lines
 nnoremap j gj
@@ -116,6 +116,12 @@ map <leader>s :source ~/.vimrc<cr>
 map <leader>p :PlugInstall<cr>
 " Formatting
 map <leader>q gqip
+map <leader>z :setlocal spell spelllang=en_us<CR> " Spellcheck
+map <leader>Z :set nospell<CR> " Turn Off Spellcheck
+map <leader>7 :UltiSnipsEdit<CR> "Edit snippets
+
+" Map Function Keys <FN> 
+" <F1> mapped to :help by default
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
@@ -127,6 +133,7 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 " Vim-Plug plugin manager
 call plug#begin()
 
+Plug 'https://github.com/adelarsq/vim-matchit'
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'junegunn/vim-easy-align'
 Plug 'tyru/open-browser.vim' " opens url in browser
@@ -190,8 +197,8 @@ let g:sort_motion_visual_block_command = 'Vissort'
 " - https://github.com/nvim-lua/completion-nvim
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsListSnippets="<C-L>"
 let g:UltiSnipsSnippetsDirectories=["UltiSnips"]
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsEnableSnipMate=1
