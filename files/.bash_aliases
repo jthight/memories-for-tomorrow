@@ -1,8 +1,8 @@
-" File: .bash_aliases
-" Author: John Hight
-" Description: .bash_aliases for Linux systems
-" Last Modified: September 29, 2021
-"
+# File: .bash_aliases
+# Author: John Hight
+# Description: .bash_aliases for Linux systems
+# Last Modified: September 29, 2021
+#
 # Aliases
 # alias alias_name="command_to_run"
 # Version Date .bash_aliases
