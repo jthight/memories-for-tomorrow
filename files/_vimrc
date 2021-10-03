@@ -283,7 +283,12 @@ map <leader>q gqip
 map <leader>1 :help<CR> " mapped to :help
 map <leader>z :setlocal spell spelllang=en_us<CR> " Spellcheck
 map <leader>Z :set nospell<CR> " Turn Off Spellcheck
-map <leader>7 :UltiSnipsEdit<CR> "Edit snippets
+if has("IOS")
+  map <leader>7 :UltiSnipsEdit!<CR> "Edit snippets
+else
+  map <leader>7 :UltiSnipsEdit<CR> "Edit snippets
+endif
+map <leader>8 :UltiSnipsEdit!<CR> "Edit snippets
 " map jk as <esc> key when in insert mode
 inoremap jk <esc>
 " Change a word to upper CASE in insert mode
