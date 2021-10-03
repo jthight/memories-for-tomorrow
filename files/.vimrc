@@ -1,14 +1,174 @@
-" File: .vimrc
+" File: $MYVIMRC
 " Author: John Hight
-" Description: vimrc for Linux systems
-" Last Modified: September 29, 2021
+" Description: vimrc for All systems
+" Last Modified: October 3, 2021
 "
 " Don't try to be vi compatible
 set nocompatible
+" OS_FUNCTIONS:
+" Functions to load OS spacific vim code
+"
+" IOS:
+function IOS_code()
+  "" iPad spacific commands
+  " "Hello IOS User"
+  " Add any system spacific startup vim commands to this file.
+  " They will be pulled in a startup
+  map <leader>h :echo "Hello IOS World"<CR>
+  "____________________________________________________________________________
+  " IOS spacific commands
+  map <leader>p :iplug update<cr>
+  map <leader>P :iplug upgrade<cr>
+  " iplug add commands; Installed PlugIns
+  " iplug add https://github.com/adelarsq/vim-matchit.git
+  " iplug add https://github.com/christoomey/vim-sort-motion.git
+  " iplug add https://github.com/christoomey/vim-titlecase.git
+  " iplug add https://github.com/honza/vim-snippets.git
+  " iplug add https://github.com/jeffkreeftmeijer/vim-numbertoggle.git
+  " iplug add https://github.com/junegunn/vim-easy-align.git
+  " iplug add https://github.com/kana/vim-textobj-indent.git
+  " iplug add https://github.com/preservim/nerdcommenter.git
+  " iplug add https://github.com/SirVer/ultisnips.git
+  " iplug add https://github.com/tpope/vim-commentary.git
+  " iplug add https://github.com/tpope/vim-repeat.git
+  " iplug add https://github.com/tpope/vim-surround.git
+  " iplug add https://github.com/vim-airline/vim-airline-themes.git
+  " iplug add https://github.com/vim-airline/vim-airline.git
+  " iplug add https://github.com/vim-scripts/AutoComplPop.git
+  " iplug add https://github.com/vim-scripts/ReplaceWithRegister.git
+  " iplug add https://github.com/tyru/open-browser.vim.git
+  " Colorscheme
+  set t_Co=256
+  set background=dark
+  colorscheme Atelier_HeathDark
+  " Set clipboard for IOS
+  set clipboard=unnamed
+  map <leader>c "+y
+  map <leader>v "+gP
+  map <leader>x "+x
+endfunction
+"
+" LINUX:
+function LINUX_code()
+  " "Hello Linux User"
+  " Add any system spacific startup vim commands to this file.
+  " They will be pulled in a startup
+  map <leader>h :echo "Hello Linux World"<CR>
+  "____________________________________________________________________________
+  " Linux system spacific stuff
+  "
+  map <leader>p :PlugUpdate<CR>
+  " Vim-Plug plugin manager
+  call plug#begin()
+  Plug 'https://github.com/adelarsq/vim-matchit'
+  Plug 'https://github.com/altercation/vim-colors-solarized.git'
+  Plug 'junegunn/vim-easy-align'
+  Plug 'tyru/open-browser.vim' " opens url in browser
+  Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+  Plug 'preservim/nerdcommenter' " Comment test in/out
+  Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
+  Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
+  Plug 'https://github.com/tpope/vim-repeat.git'
+  Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
+  Plug 'christoomey/vim-titlecase'
+  Plug 'christoomey/vim-sort-motion'
+  Plug 'vim-scripts/AutoComplPop'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  call plug#end()
+  " Color scheme (terminal)
+  set t_Co=256
+  set background=dark
+  let g:solarized_termcolors=256
+  let g:solarized_termtrans=1
+  colorscheme solarized
+  " Run Python3 with <F9>
+  autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+  " load .vimrc-sys if present
+  if !empty(glob("~/.vimrc-sys"))
+    source ~/.vimrc-sys
+  endif
+endfunction
+"
+" WINDOWS:
+function WIN_coce()
+  " "Hello Windows User"
+  " Add any system spacific startup vim commands to this file.
+  " They will be pulled in a startup
+  map <leader>h :echo "Hello Windows World"<CR>
+  "____________________________________________________________________________
+  " windows spacific commands
+  map <leader>p :PlugUpdate<cr>
+  " Vim-Plug plugin manager
+  call plug#begin()
+  Plug 'https://github.com/adelarsq/vim-matchit'
+  Plug 'junegunn/vim-easy-align'
+  Plug 'tyru/open-browser.vim' " opens url in browser
+  Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+  Plug 'preservim/nerdcommenter' " Comment test in/out
+  Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
+  Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
+  Plug 'chriskempson/base16-vim' " Color package for vim
+  Plug 'https://github.com/tpope/vim-repeat.git'
+  Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
+  Plug 'christoomey/vim-titlecase'
+  Plug 'christoomey/vim-sort-motion'
+  Plug 'vim-scripts/AutoComplPop'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  call plug#end()
+  " Run Python3 with <F9>
+  autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+  " OPEN_FILE_IN_BROWSER:
+  " Open the current file in the default browser`
+  command! OpenBrowserCurrent execute "OpenBrowser" "file:///" . expand('%:p:gs?\\?/?')
+  " Color scheme (terminal)
+  highlight Normal guifg=white guibg=black
+  colorscheme base16-gruvbox-dark-medium
+  let base16colorspace=256  " Access colors present in 256 colorspace
+  set termguicolors
+  if has("gui_win32")
+    set guifont=lucida_console:h12:cANSI
+    set lines=50 columns=150
+    set linespace=4
+    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar
+    highlight Cursor guifg=red guibg=gray
+    highlight iCursor guifg=white guibg=steelblue
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=i:ver100-iCursor
+    set guicursor+=n-v-c:blinkon0
+    set guicursor+=i:blinkwait10
+  endif
+  " Set clipboard for Windows 
+  set clipboard=unnamed
+  map <leader>c "+y
+  map <leader>v "+gP
+  map <leader>x "+x
+  set pythonthreehome=C:\bin\Python3
+  set pythonthreedll=C:\bin\python3\python39.dll
+  " Check to avoid UltiSnips Deprecation Warning imp module is deprecated
+  if has('python3')
+    silent! python3 1
+  endif
+  " load _vimrc-sys if present
+  if !empty(glob("~/_vimrc-sys"))
+    source ~/_vimrc-sys
+  endif
+endfunction
 
+" GENERAL_CODE:
 " Turn on syntax highlighting
 syntax enable
 filetype plugin on
+filetype plugin indent on
 
 " Search and fins files
 set path+=**
@@ -40,7 +200,9 @@ let g:netrw_banner=0        " disable annoying banner
 let g:netrw_browse_split=4  " open in prior window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
+if has("win32") || has("linux")
+  let g:netrw_list_hide=netrw_gitignore#Hide()
+endif
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " - :edit a folder to open a file browser
 " - <CR>/v/t to open in an h-split/v-split/tab
@@ -69,7 +231,8 @@ set colorcolumn=80
 set signcolumn=no " Show error indicators on left column
 set formatoptions=tcqrn1
 set tabstop=2
-autocmd FileType python setlocal tabstop=4
+autocmd FileType python setlocal tabstop=2
+autocmd FileType yaml setlocal tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -110,15 +273,21 @@ set showmatch
 let mapleader = " "
 " leader key strokes
 map <leader><space> :let @/=''<cr> " clear search
-map <leader>w :set wrap<cr>
-map <leader>e :set nowrap<cr>
-map <leader>s :source ~/.vimrc<cr>
-map <leader>p :PlugUpdate<cr>
+map <leader>sw :set wrap<cr>
+map <leader>nw :set nowrap<cr>
+map <leader>vr :source $MYVIMRC<cr>
+map <leader>ve :edit $MYVIMRC<cr>
+map <leader>n :tabn<cr>
 " Formatting
 map <leader>q gqip
+map <leader>1 :help<CR> " mapped to :help
 map <leader>z :setlocal spell spelllang=en_us<CR> " Spellcheck
 map <leader>Z :set nospell<CR> " Turn Off Spellcheck
 map <leader>7 :UltiSnipsEdit<CR> "Edit snippets
+" map jk as <esc> key when in insert mode
+inoremap jk <esc>
+" Change a word to upper CASE in insert mode
+inoremap <C-U> <esc>viwUea
 
 " Map Function Keys <FN> 
 " <F1> mapped to :help by default
@@ -129,31 +298,6 @@ set listchars=tab:▸\ ,eol:¬
 " set list " To enable by default
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
-
-" Vim-Plug plugin manager
-call plug#begin()
-
-Plug 'https://github.com/adelarsq/vim-matchit'
-Plug 'https://github.com/altercation/vim-colors-solarized.git'
-Plug 'junegunn/vim-easy-align'
-Plug 'tyru/open-browser.vim' " opens url in browser
-Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-Plug 'preservim/nerdcommenter' " Comment test in/out
-Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
-Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
-Plug 'https://github.com/tpope/vim-repeat.git'
-Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
-Plug 'christoomey/vim-titlecase'
-Plug 'christoomey/vim-sort-motion'
-Plug 'vim-scripts/AutoComplPop'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-call plug#end()
-" Run Python3 with <F9>
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 " NERDTree Like with netrw
 " Toggle Vexplore with Ctrl-E
@@ -179,6 +323,16 @@ function! ToggleVExplorer()
 endfunction
 map <silent> <C-E> :call ToggleVExplorer()<CR>
 
+" Load system spacific vim directives and PlugIns
+if has("IOS")
+  call IOS_code()
+endif
+if has("win32")
+  call WIN_coce()
+endif
+if has("linux")
+  call LINUX_code()
+endif
 " NERDcommenter settings
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -217,19 +371,4 @@ nmap ga <Plug>(EasyAlign)
 
 " Status bar look
 let g:airline_theme='apprentice'
-"____________________________________________________________________________
-" Linux system spacific stuff
-"
-" Color scheme (terminal)
-set t_Co=256
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-colorscheme solarized
-
-" ~/.vimrc-sys contains system spacific vim directives
-" load .vimrc-sys if present
-if !empty(glob("~/.vimrc-sys"))
-  source ~/.vimrc-sys
-endif
 
