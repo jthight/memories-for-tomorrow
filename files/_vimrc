@@ -1,8 +1,8 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 3, 2021
-"
+" Last Modified: October 4, 2021
+" Use "/MAIN" to go to GENERAL_CODE
 " Don't try to be vi compatible
 set nocompatible
 " OS_FUNCTIONS:
@@ -164,7 +164,7 @@ function WIN_coce()
   endif
 endfunction
 
-" GENERAL_CODE:
+" MAIN_GENERAL_CODE:
 " Turn on syntax highlighting
 syntax enable
 filetype plugin on
@@ -276,11 +276,12 @@ map <leader><space> :let @/=''<cr> " clear search
 map <leader>sw :set wrap<cr>
 map <leader>nw :set nowrap<cr>
 map <leader>vr :source $MYVIMRC<cr>
-map <leader>ve :edit $MYVIMRC<cr>
-map <leader>n :tabn<cr>
+map <leader>ve :tabedit $MYVIMRC<cr>
+map <leader>c :tabc<cr>
+map <leader>f /<C-R><C-W><cr>
 " Formatting
 map <leader>q gqip
-map <leader>1 :help<CR> " mapped to :help
+map <leader>1 :tab help <C-R><C-W><CR> " mapped to :help
 map <leader>z :setlocal spell spelllang=en_us<CR> " Spellcheck
 map <leader>Z :set nospell<CR> " Turn Off Spellcheck
 if has("IOS")
