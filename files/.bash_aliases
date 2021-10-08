@@ -1,14 +1,14 @@
 # File: .bash_aliases
 # Author: John Hight
 # Description: .bash_aliases for Linux systems
-# Last Modified: September 29, 2021
+# Last Modified: October 8, 2021
 #
 # Aliases
 # alias alias_name="command_to_run"
 # Version Date .bash_aliases
 # Ansible copied file .bash_aliases
 
-alias a-v='echo "Version 20210929"'
+alias a-v='echo "Version 20211008"'
 # Long format list
 alias ll="ls -la"
 ## Show hidden files ##
@@ -31,9 +31,18 @@ alias udb='source ~/.bashrc && echo "~/.bashrc -- updated"'
 
 # nb - nano edit ~/.bashrc
 alias nb='nano ~/.bashrc'
+alias vb='vim ~/.bashrc'
 
 # nba - nano edit ~/.bash_aliases
 alias nba='nano ~/.bash_aliases'
+alias vba='vim ~/.bash_aliases'
+
+# Edit .vimrc and .vimrc-sys
+alias vv='vim ~/.vimrc'
+alias vs='vim ~/.vimrc-sys'
+
+# Speedtest Internet speed 
+alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
 
 # Useful alias
 alias dirs="ls -al | grep '^d'"
@@ -48,6 +57,11 @@ alias mkdir='mkdir -pv'
 alias bc='bc -l'
 alias a='alias'
 alias al='alias | less -m'
+alias df='df -h -x squashfs -x tmpfs -x devtmpfs'
+alias lsmount='mount |column -t'
+alias extip='curl icanhazip.com'
+alias mem5='ps auxf | sort -nr -k 4 | head -5'
+alias cpu5='ps auxf | sort -nr -k 3 | head -5'
 
 # View the calender by typing the first three letters of the month.
 alias jan='cal -m 01'
@@ -131,6 +145,7 @@ if [ $_uid = "0" ]; then
   alias firewall=iptlist
   # udug - update and upgrade apps
   alias udug='apt update && apt full-upgrade -y'
+  alias upgrade='apt update && apt dist-upgrade -y'
   # ud - update, full-upgrade, install  apps database
   alias ud='apt update'
   alias ug='apt full-upgrade -y'
@@ -151,6 +166,7 @@ else # We need sudo!
   alias firewall=iptlist
   # udug - update and upgrade apps
   alias udug='sudo apt update && sudo apt full-upgrade -y'
+  alias upgrade='sudo apt update && sudo apt dist-upgrade -y'
   # ud - update, full-upgrade, install  apps database
   alias ud='sudo apt update'
   alias ug='sudo apt full-upgrade -y'
