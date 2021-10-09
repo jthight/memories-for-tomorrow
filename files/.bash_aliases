@@ -42,7 +42,7 @@ alias vv='vim ~/.vimrc'
 alias vs='vim ~/.vimrc-sys'
 
 # Speedtest Internet speed 
-alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
+alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
 
 # Useful alias
 alias dirs="ls -al | grep '^d'"
