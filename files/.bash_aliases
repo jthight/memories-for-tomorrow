@@ -60,7 +60,7 @@ alias al='alias | less -m'
 alias df='df -h -x squashfs -x tmpfs -x devtmpfs'
 alias lsmount='mount |column -t'
 alias extip='curl icanhazip.com'
-alias ipl='ifconfig | grep "inet " | grep -v 127.0.0.1 | awk "{print \$2}"'
+alias ipl='ip a | grep "inet " | grep -v 127.0.0.1 | awk "{print \$2}"'
 alias mem5='ps auxf | sort -nr -k 4 | head -5'
 alias cpu5='ps auxf | sort -nr -k 3 | head -5'
 
