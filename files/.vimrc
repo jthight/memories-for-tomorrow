@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 4, 2021
+" Last Modified: October 11, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Don't try to be vi compatible
 set nocompatible
@@ -152,7 +152,7 @@ function WIN_coce()
   map <leader>c "+y
   map <leader>v "+gP
   map <leader>x "+x
-  set pythonthreehome=C:\bin\Python3
+  set pythonthreehome=C:\bin\python3
   set pythonthreedll=C:\bin\python3\python39.dll
   " Check to avoid UltiSnips Deprecation Warning imp module is deprecated
   if has('python3')
