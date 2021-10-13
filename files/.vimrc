@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 11, 2021
+" Last Modified: October 13, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Don't try to be vi compatible
 set nocompatible
@@ -327,7 +327,7 @@ function! ToggleVExplorer()
       let t:expl_buf_num = bufnr("%")
   endif
 endfunction
-map <silent> <C-E> :call ToggleVExplorer()<CR>
+map <silent> <C-G> :call ToggleVExplorer()<CR>
 
 " Load system spacific vim directives and PlugIns
 if has("IOS")
