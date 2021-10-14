@@ -1,15 +1,22 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 13, 2021
+" Last Modified: October 14, 2021
 " Use "/MAIN" to go to GENERAL_CODE
-" Don't try to be vi compatible
-set nocompatible
+" Normally this if-block is not needed, because `:set nocp` is done
+" automatically when .vimrc is found. However, this might be useful
+" when you execute `vim -u .vimrc` from the command line.
+if &compatible
+  " `:set nocp` has many side effects. Therefore this should be done
+  " only when 'compatible' is set.
+  set nocompatible
+endif
+
 " OS_FUNCTIONS:
 " Functions to load OS spacific vim code
 "
 " IOS:
-function IOS_code()
+function! IOS_code()
   "" iPad spacific commands
   " "Hello IOS User"
   " Add any system spacific startup vim commands to this file.
@@ -49,7 +56,7 @@ function IOS_code()
 endfunction
 "
 " LINUX:
-function LINUX_code()
+function! LINUX_code()
   " "Hello Linux User"
   " Add any system spacific startup vim commands to this file.
   " They will be pulled in a startup
@@ -57,27 +64,66 @@ function LINUX_code()
   "____________________________________________________________________________
   " Linux system spacific stuff
   "
-  map <leader>p :PlugUpdate<CR>
-  " Vim-Plug plugin manager
-  call plug#begin()
-  Plug 'https://github.com/adelarsq/vim-matchit'
-  Plug 'https://github.com/altercation/vim-colors-solarized.git'
-  Plug 'junegunn/vim-easy-align'
-  Plug 'tyru/open-browser.vim' " opens url in browser
-  Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-  Plug 'preservim/nerdcommenter' " Comment test in/out
-  Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
-  Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
-  Plug 'https://github.com/tpope/vim-repeat.git'
-  Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
-  Plug 'christoomey/vim-titlecase'
-  Plug 'christoomey/vim-sort-motion'
-  Plug 'vim-scripts/AutoComplPop'
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  call plug#end()
+  " Try to load minpac.
+  packadd minpac
+
+  if !exists('g:loaded_minpac')
+    " minpac is not available.
+    map <leader>pu :PlugUpdate<CR>
+    " Vim-Plug plugin manager
+    call plug#begin()
+    Plug 'https://github.com/adelarsq/vim-matchit'
+    Plug 'https://github.com/altercation/vim-colors-solarized.git'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'tyru/open-browser.vim' " opens url in browser
+    Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+    Plug 'preservim/nerdcommenter' " Comment test in/out
+    Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
+    Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
+    Plug 'https://github.com/tpope/vim-repeat.git'
+    Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
+    Plug 'christoomey/vim-titlecase'
+    Plug 'christoomey/vim-sort-motion'
+    Plug 'vim-scripts/AutoComplPop'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    call plug#end()
+    " Settings for plugin-less environment.
+    
+  else
+    " minpac is available.
+    call minpac#init()
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
+    call minpac#add('vim-jp/syntax-vim-ex')
+    call minpac#add('adelarsq/vim-matchit')
+    call minpac#add('altercation/vim-colors-solarized')
+    call minpac#add('junegunn/vim-easy-align')
+    call minpac#add('tyru/open-browser.vim') " opens url in browser
+    call minpac#add('tpope/vim-surround') " Surrounding ysw)
+    call minpac#add('preservim/nerdcommenter') " Comment test in/out
+    call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
+    call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
+    call minpac#add('tpope/vim-repeat')
+    call minpac#add('vim-scripts/ReplaceWithRegister')
+    call minpac#add('christoomey/vim-titlecase')
+    call minpac#add('christoomey/vim-sort-motion')
+    call minpac#add('vim-scripts/AutoComplPop')
+    call minpac#add('SirVer/ultisnips')
+    call minpac#add('honza/vim-snippets')
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('vim-airline/vim-airline-themes')
+    call minpac#add('chriskempson/base16-vim')
+    " Additional plugins here.
+
+    " Plugin commands
+    map <leader>pu :call minpac#update()<CR>
+    map <leader>pc :call minpac#clean()<CR>
+    map <leader>ps :call minpac#status()<CR>
+
+  endif
+
   " Color scheme (terminal)
   set t_Co=256
   set background=dark
@@ -93,34 +139,75 @@ function LINUX_code()
 endfunction
 "
 " WINDOWS:
-function WIN_coce()
+function! WIN_coce()
   " "Hello Windows User"
   " Add any system spacific startup vim commands to this file.
   " They will be pulled in a startup
   map <leader>h :echo "Hello Windows World"<CR>
   "____________________________________________________________________________
   " windows spacific commands
-  map <leader>p :PlugUpdate<cr>
-  " Vim-Plug plugin manager
-  call plug#begin()
-  Plug 'https://github.com/adelarsq/vim-matchit'
-  Plug 'junegunn/vim-easy-align'
-  Plug 'tyru/open-browser.vim' " opens url in browser
-  Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-  Plug 'preservim/nerdcommenter' " Comment test in/out
-  Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
-  Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
-  Plug 'chriskempson/base16-vim' " Color package for vim
-  Plug 'https://github.com/tpope/vim-repeat.git'
-  Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
-  Plug 'christoomey/vim-titlecase'
-  Plug 'christoomey/vim-sort-motion'
-  Plug 'vim-scripts/AutoComplPop'
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  call plug#end()
+  "
+  " Try to load minpac.
+  packadd minpac
+
+  if !exists('g:loaded_minpac')
+    " minpac is not available.
+    map <leader>pu :PlugUpdate<CR>
+    " Vim-Plug plugin manager
+    call plug#begin()
+    Plug 'https://github.com/adelarsq/vim-matchit'
+    Plug 'https://github.com/altercation/vim-colors-solarized.git'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'tyru/open-browser.vim' " opens url in browser
+    Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+    Plug 'preservim/nerdcommenter' " Comment test in/out
+    Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
+    Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
+    Plug 'https://github.com/tpope/vim-repeat.git'
+    Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
+    Plug 'christoomey/vim-titlecase'
+    Plug 'christoomey/vim-sort-motion'
+    Plug 'vim-scripts/AutoComplPop'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'chriskempson/base16-vim' " Color package for vim
+    call plug#end()
+    " Settings for plugin-less environment.
+    
+  else
+    " minpac is available.
+    call minpac#init()
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
+    call minpac#add('vim-jp/syntax-vim-ex')
+    call minpac#add('adelarsq/vim-matchit')
+    call minpac#add('altercation/vim-colors-solarized')
+    call minpac#add('junegunn/vim-easy-align')
+    call minpac#add('tyru/open-browser.vim') " opens url in browser
+    call minpac#add('tpope/vim-surround') " Surrounding ysw)
+    call minpac#add('preservim/nerdcommenter') " Comment test in/out
+    call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
+    call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
+    call minpac#add('tpope/vim-repeat')
+    call minpac#add('vim-scripts/ReplaceWithRegister')
+    call minpac#add('christoomey/vim-titlecase')
+    call minpac#add('christoomey/vim-sort-motion')
+    call minpac#add('vim-scripts/AutoComplPop')
+    call minpac#add('SirVer/ultisnips')
+    call minpac#add('honza/vim-snippets')
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('vim-airline/vim-airline-themes')
+    call minpac#add('chriskempson/base16-vim')
+    " Additional plugins here.
+
+    " Plugin commands
+    map <leader>pu :call minpac#update()<CR>
+    map <leader>pc :call minpac#clean()<CR>
+    map <leader>ps :call minpac#status()<CR>
+
+  endif
+
   " Run Python3 with <F9>
   autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
   " OPEN_FILE_IN_BROWSER:
