@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 14, 2021
+" Last Modified: October 17, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -115,7 +115,18 @@ function! LINUX_code()
     call minpac#add('vim-airline/vim-airline')
     call minpac#add('vim-airline/vim-airline-themes')
     call minpac#add('chriskempson/base16-vim')
+    call minpac#add('preservim/nerdtree')
     " Additional plugins here.
+    call minpac#add('scrooloose/syntastic')
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_python_checkers = ['pylint']
 
     " Plugin commands
     map <leader>pu :call minpac#update()<CR>
@@ -123,13 +134,19 @@ function! LINUX_code()
     map <leader>ps :call minpac#status()<CR>
 
   endif
-
-  " Color scheme (terminal)
-  set t_Co=256
-  set background=dark
-  let g:solarized_termcolors=256
-  let g:solarized_termtrans=1
-  colorscheme solarized
+  if has('nvim')
+    highlight Normal guifg=white guibg=black
+    colorscheme base16-gruvbox-dark-medium
+    let base16colorspace=256  " Access colors present in 256 colorspace
+    set termguicolors
+  else
+    " Color scheme (terminal)
+    set t_Co=256
+    set background=dark
+    let g:solarized_termcolors=256
+    let g:solarized_termtrans=1
+    colorscheme solarized
+  endif
   " Run Python3 with <F9>
   autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
   " load .vimrc-sys if present
@@ -199,7 +216,23 @@ function! WIN_coce()
     call minpac#add('vim-airline/vim-airline')
     call minpac#add('vim-airline/vim-airline-themes')
     call minpac#add('chriskempson/base16-vim')
+    call minpac#add('preservim/nerdtree')
+    if has('nvim')
+      call minpac#add('Shougo/deoplete.nvim')
+      call minpac#update('', {'do': 'UpdateRemotePlugins'})
+      let g:deoplete#enable_at_startup = 1
+    endif
     " Additional plugins here.
+    call minpac#add('scrooloose/syntastic')
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_python_checkers = ['pylint']
 
     " Plugin commands
     map <leader>pu :call minpac#update()<CR>
@@ -239,8 +272,13 @@ function! WIN_coce()
   map <leader>c "+y
   map <leader>v "+gP
   map <leader>x "+x
-  set pythonthreehome=C:\bin\python3
-  set pythonthreedll=C:\bin\python3\python39.dll
+  if has('nvim')
+    " let g:python_host_prog = 'C:\bin\python27'
+    " let g:python3_host_prog = 'C:\bin\python3'
+  else
+    set pythonthreehome=C:\bin\python3
+    set pythonthreedll=C:\bin\python3\python39.dll
+  endif
   " Check to avoid UltiSnips Deprecation Warning imp module is deprecated
   if has('python3')
     silent! python3 1
@@ -281,20 +319,6 @@ command! MakeTags !ctags -R .
 set complete+=kspell
 set completeopt=menuone,longest
 
-" FILE BROWSING:
-" Tweaks for browsing
-let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
-if has("win32") || has("linux")
-  let g:netrw_list_hide=netrw_gitignore#Hide()
-endif
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-" - :edit a folder to open a file browser
-" - <CR>/v/t to open in an h-split/v-split/tab
-" - check |netrw-browse-maps| for more mappings
-
 " Security
 set modelines=0
 
@@ -315,7 +339,7 @@ set encoding=utf-8
 set nowrap
 set textwidth=80
 set colorcolumn=80
-set signcolumn=no " Show error indicators on left column
+set signcolumn=no " Hide error indicators on left column
 set formatoptions=tcqrn1
 set tabstop=2
 autocmd FileType python setlocal tabstop=2
@@ -360,12 +384,14 @@ set showmatch
 let mapleader = " "
 " leader key strokes
 map <leader><space> :let @/=''<cr> " clear search
-map <leader>sw :set wrap<cr>
-map <leader>nw :set nowrap<cr>
+map <leader>ws :set wrap<cr>
+map <leader>wx :set nowrap<cr>
 map <leader>vr :source $MYVIMRC<cr>
 map <leader>ve :tabedit $MYVIMRC<cr>
 map <leader>c :tabc<cr>
 map <leader>f /<C-R><C-W><cr>
+map <leader>ss :set signcolumn=yes<cr> " Show error indicators on left column
+map <leader>sx :set signcolumn=no<cr> " Hide error indicators on left column
 " Formatting
 map <leader>q gqip
 map <leader>1 :tab help <C-R><C-W><CR> " mapped to :help
@@ -392,30 +418,6 @@ set listchars=tab:▸\ ,eol:¬
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
-" NERDTree Like with netrw
-" Toggle Vexplore with Ctrl-E
-" from https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree/5636941
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
-  else
-      exec 'wincmd w'
-      let g:netrw_winsize = 30
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
-  endif
-endfunction
-map <silent> <C-G> :call ToggleVExplorer()<CR>
-
 " Load system spacific vim directives and PlugIns
 if has("IOS")
   call IOS_code()
@@ -426,6 +428,57 @@ endif
 if has("linux")
   call LINUX_code()
 endif
+
+" autocmd VimEnter * silent NERDTree | wincmd p
+" FILE_BROWSER:
+if has("win32") || has("linux")
+  autocmd VimEnter * silent NERDTree | wincmd p
+  map <leader>g :NERDTreeFocus<CR>
+  " nnoremap <C-g> :NERDTree<CR>
+  nnoremap <C-g> :NERDTreeToggle<CR>
+  nnoremap <C-l> :NERDTreeFind<CR>
+else
+  " FILE BROWSING: with netrw
+  " Tweaks for browsing
+  let g:netrw_banner=0        " disable annoying banner
+  let g:netrw_browse_split=4  " open in prior window
+  let g:netrw_altv=1          " open splits to the right
+  let g:netrw_liststyle=3     " tree view
+  if !has('nvim')
+    if has("win32") || has("linux")
+      let g:netrw_list_hide=netrw_gitignore#Hide()
+    endif
+    let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+  endif
+  " - :edit a folder to open a file browser
+  " - <CR>/v/t to open in an h-split/v-split/tab
+  " - check |netrw-browse-maps| for more mappings
+
+  " NERDTree Like with netrw
+  " Toggle Vexplore with Ctrl-E
+  " from https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree/5636941
+  function! ToggleVExplorer()
+    if exists("t:expl_buf_num")
+        let expl_win_num = bufwinnr(t:expl_buf_num)
+        if expl_win_num != -1
+            let cur_win_nr = winnr()
+            exec expl_win_num . 'wincmd w'
+            close
+            exec cur_win_nr . 'wincmd w'
+            unlet t:expl_buf_num
+        else
+            unlet t:expl_buf_num
+        endif
+    else
+        exec 'wincmd w'
+        let g:netrw_winsize = 30
+        Vexplore
+        let t:expl_buf_num = bufnr("%")
+    endif
+  endfunction
+  map <silent> <C-G> :call ToggleVExplorer()<CR>
+endif
+
 " NERDcommenter settings
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
