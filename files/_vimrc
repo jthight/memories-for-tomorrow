@@ -141,13 +141,13 @@ function! LINUX_code()
     set termguicolors
   else
     " Color scheme (terminal)
-    colorscheme solarized
     set t_Co=256
     set background=dark
     let g:solarized_termcolors=256
     let g:solarized_termtrans=1
     let g:solarized_contrast="high"
     let g:solarized_visibility="high"
+    colorscheme solarized
   endif
   " Run Python3 with <F9>
   autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
