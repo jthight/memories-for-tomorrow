@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 17, 2021
+" Last Modified: October 18, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -35,6 +35,7 @@ function! IOS_code()
   " iplug add https://github.com/junegunn/vim-easy-align.git
   " iplug add https://github.com/kana/vim-textobj-indent.git
   " iplug add https://github.com/preservim/nerdcommenter.git
+  " iplug add https://github.com/preservim/nerdtree.git
   " iplug add https://github.com/SirVer/ultisnips.git
   " iplug add https://github.com/tpope/vim-commentary.git
   " iplug add https://github.com/tpope/vim-repeat.git
@@ -66,74 +67,46 @@ function! LINUX_code()
   "
   " Try to load minpac.
   packadd minpac
+  " minpac is available.
+  call minpac#init()
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
+  call minpac#add('vim-jp/syntax-vim-ex')
+  call minpac#add('adelarsq/vim-matchit')
+  call minpac#add('altercation/vim-colors-solarized')
+  call minpac#add('junegunn/vim-easy-align')
+  call minpac#add('tyru/open-browser.vim') " opens url in browser
+  call minpac#add('tpope/vim-surround') " Surrounding ysw)
+  call minpac#add('preservim/nerdcommenter') " Comment test in/out
+  call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
+  call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
+  call minpac#add('tpope/vim-repeat')
+  call minpac#add('vim-scripts/ReplaceWithRegister')
+  call minpac#add('christoomey/vim-titlecase')
+  call minpac#add('christoomey/vim-sort-motion')
+  call minpac#add('vim-scripts/AutoComplPop')
+  call minpac#add('SirVer/ultisnips')
+  call minpac#add('honza/vim-snippets')
+  call minpac#add('vim-airline/vim-airline')
+  call minpac#add('vim-airline/vim-airline-themes')
+  call minpac#add('chriskempson/base16-vim')
+  call minpac#add('preservim/nerdtree')
+  " Additional plugins here.
+  call minpac#add('scrooloose/syntastic')
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
 
-  if !exists('g:loaded_minpac')
-    " minpac is not available.
-    map <leader>pu :PlugUpdate<CR>
-    " Vim-Plug plugin manager
-    call plug#begin()
-    Plug 'https://github.com/adelarsq/vim-matchit'
-    Plug 'https://github.com/altercation/vim-colors-solarized.git'
-    Plug 'junegunn/vim-easy-align'
-    Plug 'tyru/open-browser.vim' " opens url in browser
-    Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-    Plug 'preservim/nerdcommenter' " Comment test in/out
-    Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
-    Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
-    Plug 'https://github.com/tpope/vim-repeat.git'
-    Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
-    Plug 'christoomey/vim-titlecase'
-    Plug 'christoomey/vim-sort-motion'
-    Plug 'vim-scripts/AutoComplPop'
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    call plug#end()
-    " Settings for plugin-less environment.
-    
-  else
-    " minpac is available.
-    call minpac#init()
-    call minpac#add('k-takata/minpac', {'type': 'opt'})
-    call minpac#add('vim-jp/syntax-vim-ex')
-    call minpac#add('adelarsq/vim-matchit')
-    call minpac#add('altercation/vim-colors-solarized')
-    call minpac#add('junegunn/vim-easy-align')
-    call minpac#add('tyru/open-browser.vim') " opens url in browser
-    call minpac#add('tpope/vim-surround') " Surrounding ysw)
-    call minpac#add('preservim/nerdcommenter') " Comment test in/out
-    call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
-    call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
-    call minpac#add('tpope/vim-repeat')
-    call minpac#add('vim-scripts/ReplaceWithRegister')
-    call minpac#add('christoomey/vim-titlecase')
-    call minpac#add('christoomey/vim-sort-motion')
-    call minpac#add('vim-scripts/AutoComplPop')
-    call minpac#add('SirVer/ultisnips')
-    call minpac#add('honza/vim-snippets')
-    call minpac#add('vim-airline/vim-airline')
-    call minpac#add('vim-airline/vim-airline-themes')
-    call minpac#add('chriskempson/base16-vim')
-    call minpac#add('preservim/nerdtree')
-    " Additional plugins here.
-    call minpac#add('scrooloose/syntastic')
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_python_checkers = ['pylint']
 
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_python_checkers = ['pylint']
+  " Plugin commands
+  map <leader>pu :call minpac#update()<CR>
+  map <leader>pc :call minpac#clean()<CR>
+  map <leader>ps :call minpac#status()<CR>
 
-    " Plugin commands
-    map <leader>pu :call minpac#update()<CR>
-    map <leader>pc :call minpac#clean()<CR>
-    map <leader>ps :call minpac#status()<CR>
-
-  endif
   if has('nvim')
     highlight Normal guifg=white guibg=black
     colorscheme base16-gruvbox-dark-medium
@@ -168,80 +141,50 @@ function! WIN_coce()
   "
   " Try to load minpac.
   packadd minpac
-
-  if !exists('g:loaded_minpac')
-    " minpac is not available.
-    map <leader>pu :PlugUpdate<CR>
-    " Vim-Plug plugin manager
-    call plug#begin()
-    Plug 'https://github.com/adelarsq/vim-matchit'
-    Plug 'https://github.com/altercation/vim-colors-solarized.git'
-    Plug 'junegunn/vim-easy-align'
-    Plug 'tyru/open-browser.vim' " opens url in browser
-    Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-    Plug 'preservim/nerdcommenter' " Comment test in/out
-    Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
-    Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
-    Plug 'https://github.com/tpope/vim-repeat.git'
-    Plug 'https://github.com/vim-scripts/ReplaceWithRegister.git'
-    Plug 'christoomey/vim-titlecase'
-    Plug 'christoomey/vim-sort-motion'
-    Plug 'vim-scripts/AutoComplPop'
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'chriskempson/base16-vim' " Color package for vim
-    call plug#end()
-    " Settings for plugin-less environment.
-    
-  else
-    " minpac is available.
-    call minpac#init()
-    call minpac#add('k-takata/minpac', {'type': 'opt'})
-    call minpac#add('vim-jp/syntax-vim-ex')
-    call minpac#add('adelarsq/vim-matchit')
-    call minpac#add('altercation/vim-colors-solarized')
-    call minpac#add('junegunn/vim-easy-align')
-    call minpac#add('tyru/open-browser.vim') " opens url in browser
-    call minpac#add('tpope/vim-surround') " Surrounding ysw)
-    call minpac#add('preservim/nerdcommenter') " Comment test in/out
-    call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
-    call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
-    call minpac#add('tpope/vim-repeat')
-    call minpac#add('vim-scripts/ReplaceWithRegister')
-    call minpac#add('christoomey/vim-titlecase')
-    call minpac#add('christoomey/vim-sort-motion')
-    call minpac#add('vim-scripts/AutoComplPop')
-    call minpac#add('SirVer/ultisnips')
-    call minpac#add('honza/vim-snippets')
-    call minpac#add('vim-airline/vim-airline')
-    call minpac#add('vim-airline/vim-airline-themes')
-    call minpac#add('chriskempson/base16-vim')
-    call minpac#add('preservim/nerdtree')
-    if has('nvim')
-      call minpac#add('Shougo/deoplete.nvim')
-      call minpac#update('', {'do': 'UpdateRemotePlugins'})
-      let g:deoplete#enable_at_startup = 1
-    endif
-    " Additional plugins here.
-    call minpac#add('scrooloose/syntastic')
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_python_checkers = ['pylint']
-
-    " Plugin commands
-    map <leader>pu :call minpac#update()<CR>
-    map <leader>pc :call minpac#clean()<CR>
-    map <leader>ps :call minpac#status()<CR>
-
+  " minpac is available.
+  call minpac#init()
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
+  call minpac#add('vim-jp/syntax-vim-ex')
+  call minpac#add('adelarsq/vim-matchit')
+  call minpac#add('altercation/vim-colors-solarized')
+  call minpac#add('junegunn/vim-easy-align')
+  call minpac#add('tyru/open-browser.vim') " opens url in browser
+  call minpac#add('tpope/vim-surround') " Surrounding ysw)
+  call minpac#add('preservim/nerdcommenter') " Comment test in/out
+  call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
+  call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
+  call minpac#add('tpope/vim-repeat')
+  call minpac#add('vim-scripts/ReplaceWithRegister')
+  call minpac#add('christoomey/vim-titlecase')
+  call minpac#add('christoomey/vim-sort-motion')
+  call minpac#add('vim-scripts/AutoComplPop')
+  call minpac#add('SirVer/ultisnips')
+  call minpac#add('honza/vim-snippets')
+  call minpac#add('vim-airline/vim-airline')
+  call minpac#add('vim-airline/vim-airline-themes')
+  call minpac#add('chriskempson/base16-vim')
+  call minpac#add('preservim/nerdtree')
+  if has('nvim')
+    call minpac#add('Shougo/deoplete.nvim')
+    call minpac#update('', {'do': 'UpdateRemotePlugins'})
+    let g:deoplete#enable_at_startup = 1
   endif
+  " Additional plugins here.
+  call minpac#add('scrooloose/syntastic')
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+  let g:syntastic_python_checkers = ['pylint']
+
+  " Plugin commands
+  map <leader>pu :call minpac#update()<CR>
+  map <leader>pc :call minpac#clean()<CR>
+  map <leader>ps :call minpac#status()<CR>
 
   " Run Python3 with <F9>
   autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
@@ -433,54 +376,56 @@ endif
 
 " autocmd VimEnter * silent NERDTree | wincmd p
 " FILE_BROWSER:
-if has("win32") || has("linux")
-  map <leader>g :NERDTreeFocus<CR>
-  " nnoremap <C-g> :NERDTree<CR>
-  nnoremap <C-g> :NERDTreeToggle<CR>
-  nnoremap <C-l> :NERDTreeFind<CR>
+nnoremap \g :NERDTreeFocus<CR>
+if has("win32")
+  nnoremap \n :NERDTree C:\
 else
-  " FILE BROWSING: with netrw
-  " Tweaks for browsing
-  let g:netrw_banner=0        " disable annoying banner
-  let g:netrw_browse_split=4  " open in prior window
-  let g:netrw_altv=1          " open splits to the right
-  let g:netrw_liststyle=3     " tree view
-  if !has('nvim')
-    if has("win32") || has("linux")
-      let g:netrw_list_hide=netrw_gitignore#Hide()
-    endif
-    let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-  endif
-  " - :edit a folder to open a file browser
-  " - <CR>/v/t to open in an h-split/v-split/tab
-  " - check |netrw-browse-maps| for more mappings
-
-  " NERDTree Like with netrw
-  " Toggle Vexplore with Ctrl-E
-  " from https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree/5636941
-  function! ToggleVExplorer()
-    if exists("t:expl_buf_num")
-        let expl_win_num = bufwinnr(t:expl_buf_num)
-        if expl_win_num != -1
-            let cur_win_nr = winnr()
-            exec expl_win_num . 'wincmd w'
-            close
-            exec cur_win_nr . 'wincmd w'
-            unlet t:expl_buf_num
-        else
-            unlet t:expl_buf_num
-        endif
-    else
-        exec 'wincmd w'
-        let g:netrw_winsize = 30
-        Vexplore
-        let t:expl_buf_num = bufnr("%")
-    endif
-  endfunction
-  map <silent> <C-G> :call ToggleVExplorer()<CR>
+  nnoremap \n :NERDTree ~/
 endif
+nnoremap \\ :NERDTreeToggle<CR>
+nnoremap \f :NERDTreeFind<CR>
 
-" NERDcommenter settings
+" FILE BROWSING: with netrw
+" Tweaks for browsing
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+if !has('nvim')
+  if has("win32") || has("linux")
+    let g:netrw_list_hide=netrw_gitignore#Hide()
+  endif
+  let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+endif
+" - :edit a folder to open a file browser
+" - <CR>/v/t to open in an h-split/v-split/tab
+" - check |netrw-browse-maps| for more mappings
+
+" NERDTree Like with netrw
+" Toggle Vexplore with Ctrl-E
+" from https://stackoverflow.com/questions/5006950/setting-netrw-like-nerdtree/5636941
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      exec 'wincmd w'
+      let g:netrw_winsize = 30
+      Vexplore
+      let t:expl_buf_num = bufnr("%")
+  endif
+endfunction
+map <silent> <C-G> :call ToggleVExplorer()<CR>
+
+" NERDCommenter: settings
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Allow commenting and inverting empty lines (useful when commenting a region)
