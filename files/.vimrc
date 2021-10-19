@@ -364,14 +364,15 @@ set listchars=tab:▸\ ,eol:¬
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " Load system spacific vim directives and PlugIns
-if has("IOS")
-  call IOS_code()
-endif
 if has("win32")
   call WIN_coce()
 endif
 if has("linux") || has("unix")
-  call LINUX_code()
+  if has("IOS")
+    call IOS_code()
+  else
+    call LINUX_code()
+  endif
 endif
 
 " autocmd VimEnter * silent NERDTree | wincmd p
@@ -392,7 +393,7 @@ let g:netrw_browse_split=4  " open in prior window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
 if !has('nvim')
-  if has("win32") || has("linux") || has("unix")
+  if has("win32") || has("linux")
     let g:netrw_list_hide=netrw_gitignore#Hide()
   endif
   let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
