@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 19, 2021
+" Last Modified: October 20, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -341,7 +341,8 @@ map <leader>sx :set signcolumn=no<cr> " Hide error indicators on left column
 map <leader>q gqip
 map <leader>1 :tab help <C-R><C-W><CR> " mapped to :help
 map <leader>z :setlocal spell spelllang=en_us<CR> " Spellcheck
-map <leader>Z :set nospell<CR> " Turn Off Spellcheck
+map <leader>sn :set nospell<CR> " Turn Off Spellcheck
+map <leader>sy :set spell<CR> " Turn Off Spellcheck
 if has("IOS")
   map <leader>7 :UltiSnipsEdit!<CR> "Edit snippets
 else
