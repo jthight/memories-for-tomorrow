@@ -45,6 +45,7 @@ function! IOS_code()
   " iplug add https://github.com/vim-scripts/AutoComplPop.git
   " iplug add https://github.com/vim-scripts/ReplaceWithRegister.git
   " iplug add https://github.com/tyru/open-browser.vim.git
+  " iplug add https://github.com/Raimondi/delimitMate.git
   " Colorscheme
   set t_Co=256
   set background=dark
