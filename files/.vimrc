@@ -309,8 +309,17 @@ else
   map <leader>7 :UltiSnipsEdit<CR> "Edit snippets
 endif
 map <leader>8 :UltiSnipsEdit!<CR> "Edit snippets
-" map jk as <esc> key when in insert mode
+" map jk or kj as <esc> key when in insert mode
 inoremap jk <esc>
+inoremap kj <esc>
+"Make working with multiple buffers less of a pain
+set splitright
+set splitbelow
+nnoremap <C-w>v :vnew<cr>
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
 " Change a word to upper CASE in insert mode
 inoremap <C-U> <esc>viwUea
 
