@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 20, 2021
+" Last Modified: October 21, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -55,16 +55,10 @@ function! IOS_code()
   map <leader>v "+gP
   map <leader>x "+x
 endfunction
+" PLUGINS:
+" Common function to load plugins
 "
-" LINUX:
-function! LINUX_code()
-  " "Hello Linux User"
-  " Add any system spacific startup vim commands to this file.
-  " They will be pulled in a startup
-  map <leader>h :echo "Hello Linux World"<CR>
-  "____________________________________________________________________________
-  " Linux system spacific stuff
-  "
+function! LOAD_plugins()
   " Try to load minpac.
   packadd minpac
   " minpac is available.
@@ -80,6 +74,7 @@ function! LINUX_code()
   call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
   call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
   call minpac#add('tpope/vim-repeat')
+  call minpac#add('tpope/vim-fugitive')
   call minpac#add('vim-scripts/ReplaceWithRegister')
   call minpac#add('christoomey/vim-titlecase')
   call minpac#add('christoomey/vim-sort-motion')
@@ -107,6 +102,18 @@ function! LINUX_code()
   map <leader>pc :call minpac#clean()<CR>
   map <leader>ps :call minpac#status()<CR>
 
+endfunction  
+  "
+" LINUX:
+function! LINUX_code()
+  " "Hello Linux User"
+  " Add any system spacific startup vim commands to this file.
+  " They will be pulled in a startup
+  map <leader>h :echo "Hello Linux World"<CR>
+  "____________________________________________________________________________
+  " Linux system spacific stuff
+  "
+  call LOAD_plugins() " load plugins
   if has('nvim')
     highlight Normal guifg=white guibg=black
     colorscheme base16-gruvbox-dark-medium
@@ -139,53 +146,7 @@ function! WIN_coce()
   "____________________________________________________________________________
   " windows spacific commands
   "
-  " Try to load minpac.
-  packadd minpac
-  " minpac is available.
-  call minpac#init()
-  call minpac#add('k-takata/minpac', {'type': 'opt'})
-  call minpac#add('vim-jp/syntax-vim-ex')
-  call minpac#add('adelarsq/vim-matchit')
-  call minpac#add('altercation/vim-colors-solarized')
-  call minpac#add('junegunn/vim-easy-align')
-  call minpac#add('tyru/open-browser.vim') " opens url in browser
-  call minpac#add('tpope/vim-surround') " Surrounding ysw)
-  call minpac#add('preservim/nerdcommenter') " Comment test in/out
-  call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
-  call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
-  call minpac#add('tpope/vim-repeat')
-  call minpac#add('vim-scripts/ReplaceWithRegister')
-  call minpac#add('christoomey/vim-titlecase')
-  call minpac#add('christoomey/vim-sort-motion')
-  call minpac#add('vim-scripts/AutoComplPop')
-  call minpac#add('SirVer/ultisnips')
-  call minpac#add('honza/vim-snippets')
-  call minpac#add('vim-airline/vim-airline')
-  call minpac#add('vim-airline/vim-airline-themes')
-  call minpac#add('chriskempson/base16-vim')
-  call minpac#add('preservim/nerdtree')
-  if has('nvim')
-    call minpac#add('Shougo/deoplete.nvim')
-    call minpac#update('', {'do': 'UpdateRemotePlugins'})
-    let g:deoplete#enable_at_startup = 1
-  endif
-  " Additional plugins here.
-  call minpac#add('scrooloose/syntastic')
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-  let g:syntastic_python_checkers = ['pylint']
-
-  " Plugin commands
-  map <leader>pu :call minpac#update()<CR>
-  map <leader>pc :call minpac#clean()<CR>
-  map <leader>ps :call minpac#status()<CR>
-
+  call LOAD_plugins() " load plugins
   " Run Python3 with <F9>
   autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
   " OPEN_FILE_IN_BROWSER:
@@ -217,10 +178,7 @@ function! WIN_coce()
   map <leader>c "+y
   map <leader>v "+gP
   map <leader>x "+x
-  if has('nvim')
-    " let g:python_host_prog = 'C:\bin\python27'
-    " let g:python3_host_prog = 'C:\bin\python3'
-  else
+  if !has('nvim')
     set pythonthreehome=C:\bin\python3
     set pythonthreedll=C:\bin\python3\python39.dll
   endif
