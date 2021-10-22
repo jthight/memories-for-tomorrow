@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 21, 2021
+" Last Modified: October 22, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -85,6 +85,7 @@ function! LOAD_plugins()
   call minpac#add('vim-airline/vim-airline-themes')
   call minpac#add('chriskempson/base16-vim')
   call minpac#add('preservim/nerdtree')
+  call minpac#add('raimondi/delimitmate')
   " Additional plugins here.
   call minpac#add('scrooloose/syntastic')
   set statusline+=%#warningmsg#
