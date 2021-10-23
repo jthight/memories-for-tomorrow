@@ -1,10 +1,10 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-# Version Date .bashrc
+# Version Date 20211023
 # Ansible copied file .bashrc
 
-alias b-v='echo "Version 20210906"'
+alias b-v='echo "Version 20211023"'
 
 # If not running interactively, don't do anything
 case $- in
@@ -150,6 +150,12 @@ alias l='ls -CF'
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# disable flow control CTRL-S CTRL-Q
+stty stop ''
+stty start ''
+stty -ixon
+stty -ixoff
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
