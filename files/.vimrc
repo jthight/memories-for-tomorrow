@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 22, 2021
+" Last Modified: October 23, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -92,12 +92,23 @@ function! LOAD_plugins()
   set statusline+=%#warningmsg#
   set statusline+=%{SyntasticStatuslineFlag()}
   set statusline+=%*
-
   let g:syntastic_always_populate_loc_list = 1
   let g:syntastic_auto_loc_list = 1
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
   let g:syntastic_python_checkers = ['pylint']
+  call minpac#add('haya14busa/incsearch.vim')
+  map /  <Plug>(incsearch-forward)
+  map ?  <Plug>(incsearch-backward)
+  map g/ <Plug>(incsearch-stay)
+  " set hlsearch
+  let g:incsearch#auto_nohlsearch = 1
+  map n  <Plug>(incsearch-nohl-n)
+  map N  <Plug>(incsearch-nohl-N)
+  map *  <Plug>(incsearch-nohl-*)
+  map #  <Plug>(incsearch-nohl-#)
+  map g* <Plug>(incsearch-nohl-g*)
+  map g# <Plug>(incsearch-nohl-g#)
 
   " Plugin commands
   map <leader>pu :call minpac#update()<CR>
@@ -115,6 +126,10 @@ function! LINUX_code()
   "____________________________________________________________________________
   " Linux system spacific stuff
   "
+  " Set the Thesaurus location
+  set thesaurus+=$HOME/.vim/thesaurus/english.txt
+  "
+  " load PlugIns
   call LOAD_plugins() " load plugins
   if has('nvim')
     highlight Normal guifg=white guibg=black
@@ -134,8 +149,8 @@ function! LINUX_code()
   " Run Python3 with <F9>
   autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
   " load .vimrc-sys if present
-  if !empty(glob("~/.vimrc-sys"))
-    source ~/.vimrc-sys
+  if !empty(glob("$HOME/.vimrc-sys"))
+    source $HOME/.vimrc-sys
   endif
 endfunction
 "
@@ -148,6 +163,10 @@ function! WIN_coce()
   "____________________________________________________________________________
   " windows spacific commands
   "
+  " Set the Thesaurus location
+  set thesaurus+=$HOME/vimfiles/thesaurus/english.txt
+  "
+  " Load PlugIns
   call LOAD_plugins() " load plugins
   " Run Python3 with <F9>
   autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
@@ -189,8 +208,8 @@ function! WIN_coce()
     silent! python3 1
   endif
   " load _vimrc-sys if present
-  if !empty(glob("~/_vimrc-sys"))
-    source ~/_vimrc-sys
+  if !empty(glob("$HOME/_vimrc-sys"))
+    source $HOME/_vimrc-sys
   endif
 endfunction
 
@@ -312,6 +331,11 @@ map <leader>8 :UltiSnipsEdit!<CR> "Edit snippets
 " map jk or kj as <esc> key when in insert mode
 inoremap jk <esc>
 inoremap kj <esc>
+"So I can move around in insert
+inoremap <C-k> <C-o>gk
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-j> <C-o>gj
 "Make working with multiple buffers less of a pain
 set splitright
 set splitbelow
@@ -351,7 +375,7 @@ nnoremap \g :NERDTreeFocus<CR>
 if has("win32")
   nnoremap \n :NERDTree C:\
 else
-  nnoremap \n :NERDTree ~/
+  nnoremap \n :NERDTree $HOME/
 endif
 nnoremap \\ :NERDTreeToggle<CR>
 nnoremap \f :NERDTreeFind<CR>
