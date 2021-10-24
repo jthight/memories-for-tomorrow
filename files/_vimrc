@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 23, 2021
+" Last Modified: October 24, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -109,6 +109,7 @@ function! LOAD_plugins()
   map #  <Plug>(incsearch-nohl-#)
   map g* <Plug>(incsearch-nohl-g*)
   map g# <Plug>(incsearch-nohl-g#)
+  call minpac#add('tpope/vim-speeddating')
 
   " Plugin commands
   map <leader>pu :call minpac#update()<CR>
