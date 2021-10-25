@@ -43,7 +43,9 @@
   copy:
     src: ./files/.ssh/authorized_keys
     dest: ~/.ssh/authorized_keys
-  when: keys | bool 
+    owner: john
+    group: john
+    mode: 0600
 - name: Creates directory UltiSnips
   file:
     path: ~/.vim/UltiSnips
@@ -52,6 +54,9 @@
   copy:
     src: "{{ item }}"
     dest: ~/.vim/UltiSnips/
+    owner: john
+    group: john
+    mode: 0664
   with_fileglob:
     - "./files/.vim/UltiSnips/*"
 - name: Creates directory thesaurus
@@ -62,5 +67,8 @@
   copy:
     src: "{{ item }}"
     dest: ~/.vim/thesaurus/
+    owner: john
+    group: john
+    mode: 0664
   with_fileglob:
     - "./files/.vim/thesaurus/*"
