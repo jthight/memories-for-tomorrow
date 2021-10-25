@@ -8,14 +8,6 @@
       ansible_shell_allow_world_readable_temp: true 
       ssh_users: "john"
 
-  pre_tasks:
-    - name: update/upgrade system
-      tags: always,apt
-      apt:
-        upgrade: dist
-        update_cache: yes
-      changed_when: false
-
   tasks:
     - include: tasks/dotfiles.yml
     - include: tasks/rootdotfiles.yml
@@ -23,9 +15,6 @@
     - include: tasks/rootbin.yml
 
   handlers:
-    - name: apt_update
-      apt:
-        update_cache: yes
     - name: restart_sshd
       service:
         name: sshd
