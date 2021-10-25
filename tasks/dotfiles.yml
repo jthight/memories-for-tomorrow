@@ -39,6 +39,13 @@
     group: john
     mode: 0664
     backup: yes
+- name: Creates directory .ssh
+  file:
+    path: ~/.ssh
+    state: directory
+    owner: john
+    group: john
+    mode: 0700
 - name: Copy authorized_keys for user home .ssh/ dir
   copy:
     src: ./files/.ssh/authorized_keys
