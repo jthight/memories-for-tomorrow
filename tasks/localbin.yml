@@ -10,14 +10,27 @@
   copy:
     src: ./files/bin/cleandots
     dest: ~/bin/
+    owner: john
+    group: john
     mode: 0755
 - name: Copy ./files/bin/dotsscp
   copy:
     src: ./files/bin/dotsscp
     dest: ~/bin/
+    owner: john
+    group: john
     mode: 0755
 - name: Copy ./files/bin/lnknvim
   copy:
     src: ./files/bin/lnknvim
     dest: ~/bin/
+    owner: john
+    group: john
+    mode: 0755
+- name: Copy ./files/bin/pulldots
+  copy:
+    src: ./files/bin/pulldots
+    dest: ~/bin/
+    owner: john
+    group: john
     mode: 0755

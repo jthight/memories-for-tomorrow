@@ -1,0 +1,15 @@
+---
+- name: Creates directory /root/bin/
+  file:
+    path: /root/bin
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+- name: Copy ./files/bin/cleandots
+  copy:
+    src: ./files/bin/cleandots
+    dest: /root/bin/
+    owner: root
+    group: root
+    mode: 0755
