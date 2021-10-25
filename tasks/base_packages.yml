@@ -28,6 +28,7 @@
       - rsync  
       - sl
       - speedtest-cli
+      - subversion
       - sudo  
       - tmux
       - tree
