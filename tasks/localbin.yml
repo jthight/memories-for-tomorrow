@@ -1,0 +1,23 @@
+---
+- name: Creates directory ~/bin/
+  file:
+    path: ~/bin
+    state: directory
+    owner: john
+    group: john
+    mode: 0755
+- name: Copy ./files/bin/cleandots
+  copy:
+    src: ./files/bin/cleandots
+    dest: ~/bin/
+    mode: 0755
+- name: Copy ./files/bin/dotsscp
+  copy:
+    src: ./files/bin/dotsscp
+    dest: ~/bin/
+    mode: 0755
+- name: Copy ./files/bin/lnknvim
+  copy:
+    src: ./files/bin/lnknvim
+    dest: ~/bin/
+    mode: 0755

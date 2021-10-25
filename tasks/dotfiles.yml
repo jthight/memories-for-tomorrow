@@ -1,7 +1,7 @@
 ---
 - name: Copy .bashrc for user home dir
   copy:
-    src: files/.bashrc
+    src: ./files/.bashrc
     dest: /home/john/.bashrc
     owner: john
     group: john
@@ -9,7 +9,7 @@
     backup: yes
 - name: Copy .bash_aliases for user home dir
   copy:
-    src: files/.bash_aliases
+    src: ./files/.bash_aliases
     dest: /home/john/.bash_aliases
     owner: john
     group: john
@@ -17,7 +17,7 @@
     backup: yes
 - name: Copy .tmux.conf for user home dir
   copy:
-    src: files/.tmux.conf
+    src: ./files/.tmux.conf
     dest: /home/john/.tmux.conf
     owner: john
     group: john
@@ -25,7 +25,7 @@
     backup: yes
 - name: Copy .vimrc for user home dir
   copy:
-    src: files/.vimrc
+    src: ./files/.vimrc
     dest: /home/john/.vimrc
     owner: john
     group: john
@@ -33,9 +33,34 @@
     backup: yes
 - name: Copy .gitconfig for user home dir
   copy:
-    src: files/.gitconfig
+    src: ./files/.gitconfig
     dest: /home/john/.gitconfig
     owner: john
     group: john
     mode: 0664
     backup: yes
+- name: Copy authorized_keys for user home .ssh/ dir
+  copy:
+    src: ./files/.ssh/authorized_keys
+    dest: ~/.ssh/authorized_keys
+  when: keys | bool 
+- name: Creates directory UltiSnips
+  file:
+    path: ~/.vim/UltiSnips
+    state: directory
+- name: Copy ~/.vim/UltiSnips/* for user home dir
+  copy:
+    src: "{{ item }}"
+    dest: ~/.vim/UltiSnips/
+  with_fileglob:
+    - "./files/.vim/UltiSnips/*"
+- name: Creates directory thesaurus
+  file:
+    path: ~/.vim/thesaurus
+    state: directory
+- name: Copy ~/.vim/thesaurus/* for user home dir
+  copy:
+    src: "{{ item }}"
+    dest: ~/.vim/thesaurus/
+  with_fileglob:
+    - "./files/.vim/thesaurus/*"

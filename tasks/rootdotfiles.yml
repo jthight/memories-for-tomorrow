@@ -1,7 +1,7 @@
 ---
 - name: Copy .bashrc for user home dir
   copy:
-    src: files/.bashrc
+    src: ./files/.bashrc
     dest: /root/.bashrc
     owner: root
     group: root
@@ -9,7 +9,7 @@
     backup: yes
 - name: Copy .bash_aliases for user home dir
   copy:
-    src: files/.bash_aliases
+    src: ./files/.bash_aliases
     dest: /root/.bash_aliases
     owner: root
     group: root
@@ -17,7 +17,7 @@
     backup: yes
 - name: Copy .tmux.conf for user home dir
   copy:
-    src: files/.tmux.conf
+    src: ./files/.tmux.conf
     dest: /root/.tmux.conf
     owner: root
     group: root
@@ -25,9 +25,49 @@
     backup: yes
 - name: Copy .vimrc for user home dir
   copy:
-    src: files/.vimrc
+    src: ./files/.vimrc
     dest: /root/.vimrc
     owner: root
     group: root
     mode: 0664
     backup: yes
+- name: Copy authorized_keys for user home .ssh/ dir
+  copy:
+    src: ./files/.ssh/authorized_keys
+    dest: /root/.ssh/authorized_keys
+    owner: root
+    group: root
+    mode: 0600
+  when: keys | bool 
+- name: Creates directory UltiSnips
+  file:
+    path: /root/.vim/UltiSnips
+    state: directory
+    owner: root
+    group: root
+    mode: 0664
+- name: Copy /root/.vim/UltiSnips/* for user home dir
+  copy:
+    src: "{{ item }}"
+    dest: /root/.vim/UltiSnips/
+    owner: root
+    group: root
+    mode: 0664
+  with_fileglob:
+    - "./files/.vim/UltiSnips/*"
+- name: Creates directory thesaurus
+  file:
+    path: /root/.vim/thesaurus
+    state: directory
+    owner: root
+    group: root
+    mode: 0664
+- name: Copy /root/.vim/thesaurus/* for user home dir
+  copy:
+    src: "{{ item }}"
+    dest: /root/.vim/thesaurus/
+    owner: root
+    group: root
+    mode: 0664
+  with_fileglob:
+    - "./files/.vim/thesaurus/*"
