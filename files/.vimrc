@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 24, 2021
+" Last Modified: October 26, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -113,6 +113,7 @@ function! LOAD_plugins()
   call minpac#add('kien/ctrlp.vim')
   let g:ctrlp_map = '<c-q>'
   let g:ctrlp_cmd = 'CtrlP'
+  let g:ctrlp_dotfiles=1
   let g:ctrlp_working_path_mode = 'ra'
   if has("linux") || has("unix")
     set wildignore+=*/tmp/*,*.so,*.swp,*.zip            " MacOSX/Linux
@@ -127,6 +128,9 @@ function! LOAD_plugins()
     \ 'file': '\v\.(exe|so|dll)$',
     \ 'link': 'some_bad_symbolic_links',
     \ }
+  " search the nearest ancestor that contains .git, .hg, .svn
+  let g:ctrlp_working_path_mode = 2
+  call minpac#add('preservim/vimux')
 
   " Plugin commands
   map <leader>pu :call minpac#update()<CR>
@@ -331,6 +335,7 @@ map <leader>wx :set nowrap<cr>
 map <leader>vr :source $MYVIMRC<cr>
 map <leader>ve :tabedit $MYVIMRC<cr>
 map <leader>c :tabc<cr>
+map <leader>r :registers<cr>
 map <leader>f /<C-R><C-W><cr>
 map <leader>ss :set signcolumn=yes<cr> " Show error indicators on left column
 map <leader>sx :set signcolumn=no<cr> " Hide error indicators on left column
