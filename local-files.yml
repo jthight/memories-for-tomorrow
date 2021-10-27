@@ -14,11 +14,11 @@
     # - include: tasks/localbin.yml
     # - include: tasks/rootbin.yml
 
-  handlers:
-    - name: restart_sshd
-      service:
-        name: sshd
-        state: restarted
-    - name: update_grub
-      shell:
-        cmd: update-grub
+  # handlers:
+  #   - name: restart_sshd
+  #     service:
+  #       name: sshd
+  #       state: restarted
+  #   - name: update_grub
+  #     shell:
+  #       cmd: update-grub
