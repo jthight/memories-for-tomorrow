@@ -20,7 +20,7 @@
       changed_when: false
 
   tasks:
-    - include: tasks/dotfiles.yml
+    # - include: tasks/dotfiles.yml
     - include: tasks/base_packages.yml
     - include: tasks/base_users.yml
     - include: tasks/base_fstrim.yml

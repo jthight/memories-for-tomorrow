@@ -9,10 +9,10 @@
       ssh_users: "john"
 
   tasks:
-    - include: tasks/dotfiles.yml
-    - include: tasks/rootdotfiles.yml
-    - include: tasks/localbin.yml
-    - include: tasks/rootbin.yml
+    # - include: tasks/dotfiles.yml
+    # - include: tasks/rootdotfiles.yml
+    # - include: tasks/localbin.yml
+    # - include: tasks/rootbin.yml
 
   handlers:
     - name: restart_sshd
