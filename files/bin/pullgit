@@ -1,6 +1,10 @@
-cd /home/john/src/ansible/
+#!/bin/bash
+
+cd $HOME/src/ansible/
 git pull origin main
-cd /home/john/src/memories-for-tomorrow/
+cd $HOME/src/memories-for-tomorrow/
 git pull origin master
-cd /home/john/src/secret_stuff/
+cd $HOME/src/secret_stuff/
+git pull origin main
+cd $HOME/.dotfiles/
 git pull origin main
