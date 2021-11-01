@@ -1,10 +1,10 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-# Version Date 20211023
+# Version Date 20211031
 # Ansible copied file .bashrc
 
-alias b-v='echo "Version 20211023"'
+alias b-v='echo "Version 20211031"'
 
 # If not running interactively, don't do anything
 case $- in
@@ -66,7 +66,11 @@ fi
 PROMPT_ALTERNATIVE=twoline
 NEWLINE_BEFORE_PROMPT=yes
 # STOP KALI CONFIG VARIABLES
-_disto="$(cat /etc/os-release | egrep ^ID=)"
+if [ "$OS" = "Windows_NT" ]; then
+  _disto="ID=mingw64"
+else
+  _disto="$(cat /etc/os-release | egrep ^ID=)"
+fi
 
 if [ "$color_prompt" = yes ]; then
     # override default virtualenv indicator in prompt
@@ -168,26 +172,26 @@ if ! shopt -oq posix; then
   fi
 fi
 
-_distro="$(cat /etc/os-release | egrep ^ID=)"
-# Check Internet status 
-wget -q --spider http://google.com
-if [ $? -eq 0 ]; then
-    _ip="$(curl -s ipinfo.io/ip)"
-else
-    _ip="Internet Offline"
-fi
-
 #clear
 printf "\n"
-printf "   %s\n" "Internet IP:   $_ip"
-printf "   %s\n" "OS Distro:     $_distro"
-printf "   %s\n" "User:          $(echo $USER)"
 printf "   %s\n" "Date:          $(date)"
-printf "   %s\n" "Uptime:        $(uptime -p)"
-printf "   %s\n" "Hostname:      $(hostname -f)"
-printf "   %s\n" "Kernel:        $(uname -rms)"
-printf "   %s\n" "Packages:      $(dpkg --get-selections | wc -l)"
-printf "   %s\n" "Memory:        $(free -m -h | awk '/Mem/{print $3"/"$2}')"
+# Check Internet status 
+case "$(curl -s --max-time 2 -I http://google.com | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q')" in
+  [23]) printf "   %s\n" "Internet IP:   $(curl -s ipinfo.io/ip)";;
+  5) printf "   %s\n" "Internet IP:   Proxy Block";;
+  *) printf "   %s\n" "Internet IP:   Internet Offline";;
+esac
+printf "   %s\n" "OS Distro:     $_disto"
+if [ "$OS" != "Windows_NT" ]; then
+  printf "   %s\n" "User:          $(echo $USER)"
+  printf "   %s\n" "Uptime:        $(uptime -p)"
+  printf "   %s\n" "Hostname:      $(hostname -f)"
+  printf "   %s\n" "Kernel:        $(uname -rms)"
+  printf "   %s\n" "Packages:      $(dpkg --get-selections | wc -l)"
+  printf "   %s\n" "Memory:        $(free -m -h | awk '/Mem/{print $3"/"$2}')"
+else
+  printf "   %s\n" "User:          $USERNAME"
+fi
 printf "   %s\n" ".bashrc:       $(b-v)"
 printf "   %s\n" ".bash_aliases: $(a-v)"
 printf "\n"
