@@ -1,0 +1,12 @@
+#!/bin/bash
+
+bash1="/bin/bash"
+bash2="/usr/bin/bash"
+if [[ -f "$bash1" ]] 
+then
+  echo "$bash1 exists!"
+fi
+if [[ -f "$bash2" ]]
+then
+  echo "$bash2 exists!"
+fi

@@ -1,25 +1,28 @@
-#!/bin/bash
+#!/bin/bash 
 
-cp $HOME/bin/* $HOME/src/memories-for-tomorrow/files/bin/
-cp $HOME/bin/* $HOME/src/ansible/data/bin/
+cp $HOME/.tmux.conf /mnt/c/Users/jthig/Dropbox/Documents/dotfiles/
+cp $HOME/.tmux.conf /mnt/c/Users/jthig/OneDrive/Documents/dotfiles/
+cp $HOME/.tmux.conf $HOME/src/memories-for-tomorrow/files/
+cp $HOME/.tmux.conf $HOME/src/ansible/data/
+cp $HOME/.tmux.conf $HOME/src/secret_stuff/
 # Add all files to the repository 
 cd $HOME/src/memories-for-tomorrow/
 git add .
 # Commit changes with message with current date stamp
-git commit -m "$HOME/bin files on `date +'%d-%m-%Y %H:%M:%S'`"
+git commit -m "tmux.conf files on `date +'%d-%m-%Y %H:%M:%S'`"
 # Push changes towards GitHub
 git push -u origin master
 cd $HOME/src/secret_stuff/
 # Add all files to the repository 
 git add .
 # Commit changes with message with current date stamp
-git commit -m "$HOME/bin files on `date +'%d-%m-%Y %H:%M:%S'`"
+git commit -m "tmux.conf files on `date +'%d-%m-%Y %H:%M:%S'`"
 # Push changes towards GitHub
 git push -u origin main
 cd $HOME/src/ansible/
 # Add all files to the repository 
 git add .
 # Commit changes with message with current date stamp
-git commit -m "$HOME/bin files on `date +'%d-%m-%Y %H:%M:%S'`"
+git commit -m "tmux.conf files on `date +'%d-%m-%Y %H:%M:%S'`"
 # Push changes towards GitHub
 git push -u origin main
