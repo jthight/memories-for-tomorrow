@@ -1,7 +1,7 @@
 " File: $MYVIMRC
 " Author: John Hight
 " Description: vimrc for All systems
-" Last Modified: October 29, 2021
+" Last Modified: October 30, 2021
 " Use "/MAIN" to go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
 " automatically when .vimrc is found. However, this might be useful
@@ -75,8 +75,10 @@ function! LOAD_plugins()
   call minpac#add('tpope/vim-commentary') " For Commenting gcc & gc
   call minpac#add('jeffkreeftmeijer/vim-numbertoggle')
   call minpac#add('tpope/vim-repeat')
-  call minpac#add('tpope/vim-fugitive')
-  map <leader>g :Git 
+  if has("linux")
+    call minpac#add('tpope/vim-fugitive')
+    map <leader>g :Git 
+  endif
   call minpac#add('vim-scripts/ReplaceWithRegister')
   call minpac#add('christoomey/vim-titlecase')
   call minpac#add('christoomey/vim-sort-motion')
@@ -131,7 +133,12 @@ function! LOAD_plugins()
     \ }
   " search the nearest ancestor that contains .git, .hg, .svn
   let g:ctrlp_working_path_mode = 2
-  call minpac#add('preservim/vimux')
+  if has("linux")
+    call minpac#add('preservim/vimux')
+  endif
+  call minpac#add('sickill/vim-pasta') " Pasting in Vim with indentation adjusted to destination context.
+  call minpac#add('ervandew/supertab') " allows uses <Tab> for all insert completion needs
+  call minpac#add('vim-scripts/ZoomWin') " use <c-w>o to Zoom In or Zoom Out
 
   " Plugin commands
   map <leader>pu :call minpac#update()<CR>
