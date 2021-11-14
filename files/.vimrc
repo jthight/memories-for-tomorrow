@@ -1,8 +1,8 @@
 " File: $MYVIMRC
 " Editor: John Hight
 " Description: vimrc for All systems
-" Last Modified: November 12, 2021
-let editver = "20211112"
+" Last Modified: November 14, 2021
+let editver = "20211114"
 
 " Search For MAIN_GENERAL_CODE: To go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
@@ -81,6 +81,7 @@ function! LOAD_plugins()
   call minpac#add('tpope/vim-unimpaired')
   call minpac#add('tpope/vim-speeddating')
   call minpac#add('tpope/vim-sleuth')
+  call minpac#add('tpope/vim-markdown')
   if has("linux")
     call minpac#add('tpope/vim-fugitive')
     map <leader>g :Git 
@@ -111,7 +112,6 @@ function! LOAD_plugins()
   call minpac#add('vim-airline/vim-airline')
   call minpac#add('vim-airline/vim-airline-themes')
   call minpac#add('chriskempson/base16-vim')
-  call minpac#add('preservim/nerdcommenter') " Comment test in/out
   call minpac#add('preservim/nerdtree')
   call minpac#add('raimondi/delimitmate')
   " additional plugins here.
@@ -166,6 +166,7 @@ function! LOAD_plugins()
   map <leader>ns :SearchNotes /TODO
   map <leader>nr :RelatedNotes<CR>
   map <leader>nt :RecentNotes<CR>
+  autocmd BufNewFile,BufRead */.git/COMMIT_EDITMSG setlocal filetype=notes
   let g:notes_suffix = '.txt'
   if !empty(glob("$HOME/Dropbox/Notes/README.md"))
     let g:notes_directories = ['$HOME/Dropbox/Notes']
@@ -176,6 +177,8 @@ function! LOAD_plugins()
   nnoremap <leader>us :UnicodeSearch 
   nnoremap <leader>ud :Digraphs
   nnoremap <leader>un :UnicodeName<CR>
+  call minpac#add('preservim/vim-pencil') " Working with text
+  call minpac#add('preservim/vim-lexical') " Word Check
 
   " Plugin commands
   map <leader>pu :call minpac#update()<CR>
@@ -267,7 +270,7 @@ function! WIN_coce()
   endif
 
   " Set clipboard for Windows 
-  set clipboard=unnamed
+  " set clipboard=unnamed
   map <leader>c "+y
   map <leader>v "+gP
   map <leader>x "+x
@@ -316,8 +319,8 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 " Visual Move
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+vnoremap <Down> :m '>+1<CR>gv=gv
+vnoremap <Up> :m '<-2<CR>gv=gv
 " Insert an empty new line in normal mode
 nnoremap [oo o<Esc>0D
 nnoremap ]oo O<Esc>0D
@@ -513,6 +516,35 @@ endif
 nnoremap \\ :NERDTreeToggle<CR>
 nnoremap \f :NERDTreeFind<CR>
 
+" Pencil:
+" Manual Formatting
+" gqap - format current paragraph (see :help gq for details)
+" vapJgqap - merge two paragraphs (current and next) and format
+" ggVGgq or :g/^/norm gqq - format all paragraphs in buffer)
+function! Prose()
+  autocmd FileType markdown,mkd call pencil#init({'wrap': 'soft', 'autoformat': 1})
+  autocmd FileType text         call pencil#init({'wrap': 'hard', 'autoformat': 0})
+  call lexical#init()
+  " Set Spellcheck On
+  " setlocal spell spelllang=en_us
+  " Set wrap on
+  set wrap
+  " force top correction on most recent misspelling
+  nnoremap <buffer> <c-s> [s1z=<c-o>
+  inoremap <buffer> <c-s> <c-g>u<Esc>[s1z=`]A<c-g>u
+  " replace common punctuation
+  iabbrev <buffer> -- –
+  iabbrev <buffer> << «
+  iabbrev <buffer> >> »
+  " open most folds
+  setlocal foldlevel=6
+  let g:airline_section_x = '%{PencilMode()}'
+endfunction
+" automatically initialize buffer by file type
+autocmd FileType markdown,mkd,text call Prose()
+" invoke manually by command for other file types
+command! -nargs=0 Prose call Prose()
+
 " FILE BROWSING: with netrw
 " Tweaks for browsing
 let g:netrw_banner=0        " disable annoying banner
@@ -553,17 +585,6 @@ function! ToggleVExplorer()
 endfunction
 nnoremap <silent> <C-G> :call ToggleVExplorer()<CR>
 
-" NERDCommenter: settings
-  " Add spaces after comment delimiters by default
-  let g:NERDSpaceDelims = 1
-  " Allow commenting and inverting empty lines (useful when commenting a region)
-  let g:NERDCommentEmptyLines = 1
-  " Enable trimming of trailing whitespace when uncommenting
-  let g:NERDTrimTrailingWhitespace = 1
-  " Sort Motion.vim 'christoomey/vim-sort-motion' 
-  let g:sort_motion_flags = 'ui'
-  let g:sort_motion_visual_block_command = 'Vissort'
-
 " SNIPPS:
   " Trigger configuration. You need to change this to something other than <tab> 
   " if you use one of the following:
@@ -591,4 +612,5 @@ nmap ga <Plug>(EasyAlign)
 
 " AirLine: Status bar look
 let g:airline_theme='apprentice'
+" let g:airline_powerline_fonts = 1
 " }}} Plugin Related Settings "
