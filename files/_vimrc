@@ -1,8 +1,8 @@
 " File: $MYVIMRC
 " Editor: John Hight
 " Description: vimrc for All systems
-" Last Modified: November 14, 2021
-let editver = "20211114"
+" Last Modified: November 22, 2021
+let editver = "20211122"
 
 " Search For MAIN_GENERAL_CODE: To go to GENERAL_CODE
 " Normally this if-block is not needed, because `:set nocp` is done
@@ -84,7 +84,7 @@ function! LOAD_plugins()
   call minpac#add('tpope/vim-markdown')
   if has("linux")
     call minpac#add('tpope/vim-fugitive')
-    map <leader>g :Git 
+    nnoremap <leader>g :Git 
   endif
   call minpac#add('vim-scripts/ReplaceWithRegister')
   call minpac#add('christoomey/vim-titlecase')
@@ -94,11 +94,11 @@ function! LOAD_plugins()
     call minpac#add('christoomey/vim-tmux-runner')
     let g:tmux_navigator_no_mappings = 1
     let g:VtrUseVtrMaps = 1
-    nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
-    nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
-    nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
-    nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
-    nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+    map <silent> <C-H> :TmuxNavigateLeft<cr>
+    map <silent> <C-J> :TmuxNavigateDown<cr>
+    map <silent> <C-K> :TmuxNavigateUp<cr>
+    map <silent> <C-L> :TmuxNavigateRight<cr>
+    map <silent> <C-\> :TmuxNavigatePrevious<cr>
   endif
   call minpac#add('christoomey/vim-quicklink')
   call minpac#add('mattn/webapi-vim')
@@ -124,18 +124,6 @@ function! LOAD_plugins()
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
   let g:syntastic_python_checkers = ['pylint']
-  call minpac#add('haya14busa/incsearch.vim')
-  map /  <plug>(incsearch-forward)
-  map ?  <plug>(incsearch-backward)
-  map g/ <plug>(incsearch-stay)
-  " set hlsearch
-  let g:incsearch#auto_nohlsearch = 1
-  map n  <plug>(incsearch-nohl-n)
-  map n  <plug>(incsearch-nohl-n)
-  map *  <plug>(incsearch-nohl-*)
-  map #  <plug>(incsearch-nohl-#)
-  map g* <plug>(incsearch-nohl-g*)
-  map g# <plug>(incsearch-nohl-g#)
   call minpac#add('kien/ctrlp.vim')
   let g:ctrlp_map = '<c-q>'
   let g:ctrlp_cmd = 'CtrlP'
@@ -160,30 +148,34 @@ function! LOAD_plugins()
   call minpac#add('vim-scripts/ZoomWin') " use <c-w>o to Zoom In or Zoom Out
   call minpac#add('xolox/vim-misc') " required for xolox/vim-notes
   call minpac#add('xolox/vim-notes') " Note taking in vim :Note
-  vmap <leader>nv :SplitNoteFromSelectedText<CR>
-  map <leader>nn :Note 
-  map <leader>nd :DeleteNote
-  map <leader>ns :SearchNotes /TODO
-  map <leader>nr :RelatedNotes<CR>
-  map <leader>nt :RecentNotes<CR>
+  let g:notes_tab_indents = 0
+  vmap <leader>nn :SplitNoteFromSelectedText<CR>
+  nnoremap <leader>nn :Note 
+  nnoremap <leader>nd :DeleteNote
+  nnoremap <leader>ns :SearchNotes /TODO
+  nnoremap <leader>nr :RelatedNotes<CR>
+  nnoremap <leader>nt :RecentNotes<CR>
   autocmd BufNewFile,BufRead */.git/COMMIT_EDITMSG setlocal filetype=notes
   let g:notes_suffix = '.txt'
   if !empty(glob("$HOME/Dropbox/Notes/README.md"))
     let g:notes_directories = ['$HOME/Dropbox/Notes']
   endif
   call minpac#add('chrisbra/unicode.vim') " Unicode
-  nmap gz <Plug>(UnicodeGA)
+  nnoremap gz <Plug>(UnicodeGA)
   nnoremap <leader>ut :UnicodeTable<CR>
   nnoremap <leader>us :UnicodeSearch 
   nnoremap <leader>ud :Digraphs
   nnoremap <leader>un :UnicodeName<CR>
   call minpac#add('preservim/vim-pencil') " Working with text
   call minpac#add('preservim/vim-lexical') " Word Check
+  call minpac#add('nelstrom/vim-visual-star-search') " Search Visual * & #
+  call minpac#add('tpope/vim-abolish') " Abstract Search
+  call minpac#add('frioux/vim-regedit') " edit a register
 
   " Plugin commands
-  map <leader>pu :call minpac#update()<CR>
-  map <leader>pc :call minpac#clean()<CR>
-  map <leader>ps :call minpac#status()<CR>
+  nnoremap <leader>pu :call minpac#update()<CR>
+  nnoremap <leader>pc :call minpac#clean()<CR>
+  nnoremap <leader>ps :call minpac#status()<CR>
 endfunction  
 " }}} Load common PlugIns function "
 
@@ -217,7 +209,8 @@ function! LINUX_code()
     let g:solarized_visibility="high"
     colorscheme solarized
   endif
-
+  " set location of dictionary
+  let g:lexical#dictionary = ['/usr/share/dict/words',]
   " Run Python3 with <F9>
   autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
   " load .vimrc.local if present
@@ -279,6 +272,8 @@ function! WIN_coce()
     set pythonthreedll=C:\bin\python3\python39.dll
   endif
 
+  " set location of dictionary
+  let g:lexical#dictionary = ['C:\Users\jthig\Dropbox\dict\american-english',]
   " Check to avoid UltiSnips Deprecation Warning imp module is deprecated
   if has('python3')
     silent! python3 1
@@ -291,6 +286,26 @@ function! WIN_coce()
 endfunction
 " }}} Load Windows code function "
 
+" FUNCTIONS:
+" General functions {{{ "
+" TabMessage function to execute a cmd and redirect output to a buffers
+" use: :TabMessage cmd
+function! TabMessage(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  if empty(message)
+    echoerr "no output"
+  else
+    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    tabnew
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+    silent put=message
+  endif
+endfunction
+command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
+" }}} General functions "
+
 " MAIN_GENERAL_CODE:
 " Initial Settings {{{ "
 " code that applies to all 
@@ -301,16 +316,14 @@ if &compatible
 endif
 " Turn on syntax highlighting
 syntax enable
-filetype plugin on
 filetype plugin indent on
+set hidden
 set foldmethod=marker   " fold based on indent"
 " }}} Initial Settings "
 
 " KEYS:
 " Key Mapping {{{ "
 " COMAND MODE:
-" another way to command mode
-nnoremap <silent> [[ :
 " will recall path in command mode eg: :e %%
 cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Stop using the arrow Keys
@@ -321,12 +334,13 @@ noremap <Right> <Nop>
 " Visual Move
 vnoremap <Down> :m '>+1<CR>gv=gv
 vnoremap <Up> :m '<-2<CR>gv=gv
-" Insert an empty new line in normal mode
-nnoremap [oo o<Esc>0D
-nnoremap ]oo O<Esc>0D
 " Move up/down editor lines
 nnoremap j gj
 nnoremap k gk
+" Time Stamp:
+" Inser time with <F5> in normal and insert mode
+nnoremap <F5> "=strftime("%c")<CR>P
+inoremap <F5> <C-R>=strftime("%c")<CR>
 " LEADER KEY Mapping:
 "
 " Pick a leader key
@@ -360,15 +374,8 @@ endif
 map <leader>8 :UltiSnipsEdit!<CR> "Edit snippets
 
 " ESC:
-" map jk or jj as <esc> key when in insert mode
+" map jk <esc> key when in insert mode
 inoremap jk <esc>
-inoremap jj <esc>
-"So I can move around in insert
-" inoremap <C-k> <C-o>gk
-" inoremap <C-h> <Left>
-" inoremap <C-l> <Right>
-" inoremap <C-j> <C-o>gj
-inoremap <C-s> <ESC>A
 
 " WINDOWS:
 " Make working with multiple buffers less of a pain
@@ -451,6 +458,7 @@ set formatoptions=tcqrn1
 set tabstop=2
 autocmd FileType python setlocal tabstop=2
 autocmd FileType yaml setlocal tabstop=2
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -460,9 +468,6 @@ set noshiftround
 set scrolloff=8
 set backspace=indent,eol,start
 set matchpairs+=<:> " use % to jump between pairs
-
-" Allow hidden buffers
-set hidden
 
 " RENDERING:
 set ttyfast
@@ -522,8 +527,9 @@ nnoremap \f :NERDTreeFind<CR>
 " vapJgqap - merge two paragraphs (current and next) and format
 " ggVGgq or :g/^/norm gqq - format all paragraphs in buffer)
 function! Prose()
+  call pencil#init()
   autocmd FileType markdown,mkd call pencil#init({'wrap': 'soft', 'autoformat': 1})
-  autocmd FileType text         call pencil#init({'wrap': 'hard', 'autoformat': 0})
+  autocmd FileType text,notes   call pencil#init({'wrap': 'hard', 'autoformat': 0})
   call lexical#init()
   " Set Spellcheck On
   " setlocal spell spelllang=en_us
@@ -539,6 +545,10 @@ function! Prose()
   " open most folds
   setlocal foldlevel=6
   let g:airline_section_x = '%{PencilMode()}'
+  let g:lexical#thesaurus = ['~/.vim/thesaurus/mthesaur.txt','~/.vim/thesaurus/english.txt',]
+  let g:lexical#spell_key = '<leader>sp'
+  let g:lexical#thesaurus_key = '<leader>t'
+  let g:lexical#dictionary_key = '<leader>k'
 endfunction
 " automatically initialize buffer by file type
 autocmd FileType markdown,mkd,text call Prose()
