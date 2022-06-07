@@ -2,6 +2,8 @@
   tags: packages,base
   package:
     name:
+      - mc
+      - zsh
       - alsa-utils  
       - apt-file
       - apt-show-versions
