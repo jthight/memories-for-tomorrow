@@ -2,6 +2,9 @@
   tags: packages,base
   package:
     name:
+      - fzf
+      - exa
+      - bat
       - mc
       - zsh
       - alsa-utils  
