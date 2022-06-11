@@ -2,6 +2,7 @@
   tags: packages,base
   package:
     name:
+      - zoxide
       - fzf
       - exa
       - bat
