@@ -2,6 +2,7 @@
   tags: packages,base
   package:
     name:
+      - avahi-daemon
       - zoxide
       - fzf
       - exa
